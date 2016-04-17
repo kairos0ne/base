@@ -1,6 +1,9 @@
 # Base
 
-Base is a development repo for a personal project that I'm building to help folks develop UX strategies. 
+Base is a development repo for a personal project that I'm building to help folks develop UX strategies. I'm using the Laravel framework as well as the Vue javascript framework to build it. Details of these can be found below. 
+
+Laravel 5.1 https://laravel.com/
+Vue 1.0.20 http://vuejs.org/ 
 
 # Laravel PHP Framework
 
