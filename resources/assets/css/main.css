@@ -1,0 +1,452 @@
+#foundation {
+    float: left;
+    margin: 0px 10px 0px 0px;
+    width: 135px;
+    height: 135px;
+}
+
+#research {
+    float: left;
+    margin: 0px 10px 0px 0px;
+    width: 25%;
+    height:25%;
+}
+
+#logo {
+    min-height: 32px;
+}
+
+@media screen and (max-width:766px) {
+    #logo {
+        height: 32px;
+        margin-top: -5px;
+    }
+
+}
+
+p {
+    line-height: 2em;
+    padding-bottom: 10px;
+}
+
+.navbar-default {
+    background-color: transparent; }
+
+.navbar-nav > li > a {
+    padding-top: 37px; }
+
+.page-header {
+    margin: 20px 0 20px;
+
+}
+
+.panel-default > .panel-heading {
+    padding: 10px 15px;
+    background-color: transparent; }
+
+.panel {
+    border-radius: 0px; }
+
+.btn-primary {
+    background-color: transparent;
+    color: #888888;
+    border-color: #ddd;
+    border-radius: 0px;
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: #888888;
+    border-color: #ddd;
+    border-radius: 0px;
+}
+.btn {
+    border-radius: 0px;
+}
+.btn-primary:active .btn-primary:hover .btn-primary:focus .btn-primary:visited {
+    background-color: transparent;
+    color: #888888;
+    border-color: #ddd;
+    border-radius: 0px;
+}
+.h1, .h2, .h3, h1, h2, h3 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+h1.centre-the-construct{
+    font-weight: 100;
+}
+.survey{
+    padding: 20px 40px 30px 0px;
+}
+h1.survey{
+    font-weight: 100;
+}
+h2.survey{
+    font-weight: 100;
+}
+h4.bullets-heading {
+    font-size: 1.5em;
+    font-family: Lato;
+    font-weight: 300;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    padding-top: 0px;
+}
+li.list-bullets {
+    /*
+     * We want the bullets outside of the list,
+     * so the text is aligned. Now the actual bullet
+     * is outside of the list’s container
+     */
+    list-style-position: outside;
+    text-indent: -0.7em;
+    display: block;
+
+    /*
+     * Because the bullet is outside of the list’s
+     * container, indent the list entirely
+     */
+    margin-left: 0em;
+}
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 5px 15px;
+    margin-bottom: -1px;
+    background-color: transparent;
+    border: none;
+
+}
+.list-bullets {
+    display: block;
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 16px;
+    margin-bottom: 5px;
+    line-height: 2.3em;
+}
+
+.portthumbnail {
+    float: left;
+    padding: 0px 10px 0px 0px;
+}
+
+.clear {
+    clear: left;
+}
+
+
+.form-control {
+    border-radius: 0px;
+}
+
+.h1, h1 {
+    font-size: 36px;
+    font-weight: 300;
+}
+
+/* Tabel Persona Componant Styles */
+table {
+    border: 1px solid #888;
+    border-radius: 0px;
+    width: 100%;
+
+}
+
+th {
+
+    color: #888888;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -user-select: none;
+    border-bottom: 1px solid #888;
+}
+
+td {
+    background-color: #fff;
+    width: 25%;
+}
+
+th, td {
+    min-width: 120px;
+    padding: 10px 20px;
+}
+
+th.active {
+    color: #fff;
+}
+
+th.active .arrow {
+    opacity: 1;
+}
+
+.arrow {
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 0;
+    margin-left: 5px;
+    opacity: 0.66;
+}
+
+.arrow.asc {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #fff;
+}
+
+.arrow.dsc {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #fff;
+}
+.fa-cogs {
+    color: #888888;
+}
+
+.centre-the-construct {
+    margin-left: 40%;
+    margin-top: 15%;
+}
+/** Application Alert Alterations **/
+
+.thumbalert{
+    padding-right: 10px;
+}
+.alert-success {
+    color: #555;
+    background-color: #f3f3f3;
+    border-color: #888888;
+}
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 0px;
+}
+
+/* links */
+
+a, a :active, a:hover{
+    color: #757575;
+    text-decoration: none;
+}
+
+#inputID {
+    margin-bottom: 10px;
+}
+label {
+    font-family: Lato;
+    font-weight: 300;
+    font-size: 23px;
+}
+.custom_text_area {
+    border:none;
+    font-family: Lato;
+    font-weight:300;
+    box-shadow: none;
+    font-size: x-large;
+    float: left;
+
+}
+.custom_text_area:focus {
+    border:none
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow:none;
+}
+
+.closebracket{
+position: relative;
+float: left;
+    
+}
+.openbracket{
+    position: relative;
+    
+}
+.bracket {
+    font-family: Lato;
+    font-size: x-large;
+    font-weight: 100;
+}
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder{
+    color:
+    text-shadow: none;
+    -webkit-text-fill-color: initial;
+
+}
+input, textarea {
+    font-size: 24px;
+    padding: 10px;
+    width: 100%;
+    color: red;
+    text-shadow: 0px 0px 0px #000;
+    -webkit-text-fill-color: transparent;
+}
+
+.right-inner-addon {
+    position: relative;
+
+}
+.right-inner-addon input {
+    padding-right: 30px;
+
+}
+.right-inner-addon img {
+    position: absolute;
+    right: -10px;
+    padding: 10px 12px;
+    pointer-events: none;
+    top: -8px;
+}
+/* left inner */
+.left-inner-addon {
+    position: relative;
+
+}
+.left-inner-addon input {
+    padding-left: 30px;
+
+}
+.left-inner-addon img {
+    position: absolute;
+    left: -10px;
+    padding: 10px 12px;
+    pointer-events: none;
+    top: -8px;
+}
+.negative-space {
+    height: 20px;
+    padding-bottom: 20px;
+}
+.grey-icon {
+    color: #999999;
+}
+
+html,body {
+    height:100%;
+}
+#wrapper {
+    height: 100%;
+}
+.container-fluid {
+    margin:0px 0px 0px 0px;
+}
+/* Main content panel styling*/
+#main_content_container{
+    margin:0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    background-color: #e4e7e3;
+}
+#content_pane_container {
+    margin-top: 10px;
+
+}
+
+/*Sidebar Styling*/
+#sidebar_container {
+    margin:0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    height: 100%;
+    background-color: rgba(106, 106, 106, 0.18);
+
+}
+#sidebar_wrapper {
+    margin:0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    border-radius: 0px;
+    height: 100%;
+}
+/*Start navbar styling */
+.navbar{
+    border-radius: 0px;
+    margin-bottom: 0px;
+}
+
+li.list-group-item {
+    border-right: none;
+    border-left: 0px;
+    border-radius: none;
+}
+.list-group-item > p{
+    border-right: none;
+    border-left: 0px;
+    border-radius: none;
+    margin-bottom: 0px;
+}
+li.list-group-item:first-child {
+    border-radius:0px;
+    border-top: none;
+}
+
+li.list-group-item:last-child {
+    border-radius: 0px;
+    border-bottom: none;
+}
+
+/*Start legal styling */
+
+#copywrite {
+    padding: 10px;
+    border: 1px solid #ddd;
+    bottom: 0;
+    width: 100%;
+}
+
+
+/** Project Panel Styles - the 'project' modules on the dashboard  */
+li.project_panel{
+    border-top: 5px solid #97d700;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: 0px;
+    background-color: #fff;
+}
+p#project_panel_client,#project_panel_BusUnit  {
+    font-size: 12px;
+    margin:0 0 5px;
+}
+p#project_panel_jobNum  {
+    font-size: 9px;
+    text-align: right;
+}
+li#project_title.list-group-item:first-child {
+    border-radius:0px;
+    border-top: none;
+    background-color: #e4e7e3;
+}
+
+div#progress_bar_ID.progress { height: 20px;
+    margin-bottom: 5px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1)
+}
+/** Job List within project panel styles - the 'project' modules on the dashboard  */
+li.job_list{
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+// Rules for sizing the icon.
+   .material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+// Rules for using icons as black on a light background.
+   .material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+// Rules for using icons as white on a dark background.
+   .material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
