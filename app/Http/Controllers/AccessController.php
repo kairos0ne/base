@@ -33,14 +33,4 @@ class AccessController extends Controller
     {
        //Add if required
     }
-    public function store(Request $request)
-    {
-        $this->validate($request, ['name' => 'required', 'email' => 'email']);
-        Access::create(
-            [
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-            ]
-        );
-    }
 }
