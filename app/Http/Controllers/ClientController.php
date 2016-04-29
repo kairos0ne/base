@@ -70,7 +70,6 @@ class ClientController extends Controller
      */
     public  function store(Request $request)
     {
-        
         $this->validate($request, ['name' => 'required', 'business_area' => 'required', 'user_id' => 'required']);
         Client::create([
             'name' => $request->input('name'),
@@ -79,13 +78,4 @@ class ClientController extends Controller
         ]);
     }
 
-    /**
-     * Get the total number of clients to assign t
-     * @return int
-     */
-    public function countClients(){
-        $clients = Client::latest()->get();
-        $clientcount = count($clients);
-        return $clientcount;
-    }
 }
