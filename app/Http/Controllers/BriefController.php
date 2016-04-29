@@ -55,16 +55,5 @@ class BriefController extends Controller
             'objective' => $request->input('objective'),
             'project_id' => $request->input('project_id')
         ]);
-        return view('dashboard');
     }
-    /**
-     * Get the total number of clients to assign t
-     * @return int
-     */
-    public function countBriefs(){
-        $briefs = Brief::latest()->get();
-        $briefcount = count($briefs);
-        return $briefcount;
-    }
-
 }
