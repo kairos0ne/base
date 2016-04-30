@@ -10,25 +10,8 @@ Vue.config.debug = true;
 //include CSRF Token in header of view instance
 Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#csrf-token').getAttribute('content');
 
-//import global components
-import portfolios from './components/portfolios.vue'
-import work from './components/work.vue'
-import architecture from './components/architecture.vue'
-import persona from './components/personas.vue'
-import foundation from './components/foundation.vue'
-import addbrief from './components/add-brief.vue'
-import addclient from './components/add-client.vue'
-import research from './components/research.vue'
-import earlyaccess from './components/access.vue'
-import underconstruction from './components/construction.vue'
-import addwork from './components/add-work.vue'
-import selectbrief from './components/selectbrief.vue'
-import selectclient from './components/selectclient.vue'
-import addproject from './components/add-project.vue'
-import selectproject from './components/selectproject.vue'
-import introduction from './components/introduction.vue'
-
-// Build a S3 Custom Directive for file inputs.
+// Directives
+// Amazon S3 Directive - directive to save files requires additional work and dropzone intergration.
 Vue.directive('savefile', {
    params: ['S3'],
     bind: function () {
@@ -62,7 +45,7 @@ Vue.directive('savefile', {
     }
 });
 
-//Custom directive to bind forms needs work to accept form data
+// Custom directive to store forms 
 Vue.directive('ajax', {
     params: ['complete'],
 
@@ -94,7 +77,7 @@ Vue.directive('ajax', {
         alert(response.data.message); // Use pretty flash message instead.
     },
 
-    //get the request type from the mthod
+    //get the request type from the method
     getRequestType: function () {
         var method = this.el.querySelector('input[name="_method"]');
         return (method ? method.value : this.el.method).toLowerCase();
@@ -104,8 +87,36 @@ Vue.directive('ajax', {
        //get form data as array 
     }
 });
-// create router componant
-//New up a new view model
+
+
+//Import Components for the Application, these are the componants that belong 
+// to the main vue instance and is Global for the site and bound to the vueapplication div
+
+// Portfolio - resources/assets/js/components/portfolio
+import portfolios from './components/portfolio/portfolios.vue'
+import work from './components/portfolio/work.vue'
+import addwork from './components/portfolio/add-work.vue'
+// Page Assets - resources/assets/js/components/page_assets
+import architecture from './components/page_assets/architecture.vue'
+import persona from './components/page_assets/personas.vue'
+import foundation from './components/page_assets/foundation.vue'
+import research from './components/page_assets/research.vue'
+import earlyaccess from './components/page_assets/access.vue'
+import underconstruction from './components/page_assets/construction.vue'
+import introduction from './components/page_assets/introduction.vue'
+
+// Brief - resources/assets/js/components/brief
+import addbrief from './components/brief/add-brief.vue'
+import selectbrief from './components/brief/selectbrief.vue'
+// Client - resources/assets/js/components/client
+import addclient from './components/client/add-client.vue'
+import selectclient from './components/client/selectclient.vue'
+// Project - recourses/js/components/project
+import addproject from './components/project/add-project.vue'
+import selectproject from './components/project/selectproject.vue'
+
+
+// Main vue application instance
 new Vue({
 
     el: '#vueapplication',
@@ -116,8 +127,7 @@ new Vue({
             // 'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
         }
     },
-    data: {
-
+data: {
         formData:[],
         user: null,
         clientList:[],
@@ -146,8 +156,6 @@ new Vue({
             business_area:'',
             user_id:null
         }
-
-    
     },
     props: {
     
@@ -160,18 +168,17 @@ new Vue({
         research: research,
         architecture: architecture,
         foundation: foundation,
+        earlyaccess: earlyaccess,
+        underconstruction:underconstruction,
+        introduction: introduction,
         addbrief: addbrief,
         selectbrief:selectbrief,
         addproject: addproject,
         selectproject: selectproject,
-        earlyaccess: earlyaccess,
-        underconstruction:underconstruction,
         addclient:addclient,
-        selectclient: selectclient,
-        introduction: introduction
+        selectclient: selectclient
     },
-    created() {
-       console.log('Vue & Vueify Ready');
+    ready() {
         this.getDashboardData();
     },
     methods: {
@@ -185,8 +192,10 @@ new Vue({
          this.$http.get('/api/get/briefs').then(function (briefs) {
              this.briefList = briefs.data;
          })
-
-     }
+     },
+     
     }
 
 });
+
+
