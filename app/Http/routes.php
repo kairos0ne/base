@@ -1,10 +1,12 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Client;
 use App\User;
 use App\Project;
 use App\Brief;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -13,7 +15,6 @@ use App\Brief;
 | This route group applies the "web" middleware group to every route
 | it contains. The "web" middleware group is defined in your HTTP
 | kernel and includes session state, CSRF protection, and more.
-|
 */
 
 Route::group(['middleware' => 'web'], function () {
@@ -49,13 +50,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('api/post/portfolios', [
         'as' => 'api.portfolio.store', 'uses' => 'PortfolioController@store'
     ]);
-    /**  All portfolios related api routes **/
-    Route::get('api/briefs/{id}', [
-        'as' => 'api.brief.show', 'uses' => 'BriefController@show'
-    ]);
-    Route::get('api/get/briefs', [
-        'as' => 'api.briefs.index', 'uses' => 'BriefController@index'
-    ]);
     Route::post('api/post/briefs', [
         'as' => 'api.briefs.store', 'uses' => 'BriefController@store'
     ]);
@@ -68,49 +62,57 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('api/get/clients', function (){
         // Get the current signed in user
         $user = Auth::user();
-        // Get all clients to check ID
-        $allclients = Client::latest()->get();
         // Get the users clients
-        $clients = Client::latest()->where('user_id', $user->id )->get();
-        // Count the clients and and assign that to a variable
-        $clientcount = count($clients);
-        // Count all clients
-        $allclientcount = count($allclients);
-        return $clients;
+        $clients = Client::where('user_id', $user->id)->get();
+        return $clients->toArray();
     });
     Route::get('api/get/projects', function (){
         // Get the current signed in user
         $user = Auth::user();
         // Get the users clients
-        $clients = Client::latest()->where('user_id', $user->id )->get();
-        // Get the projects associated with the user clients
-        foreach ($clients as $client);
-        $projects = Project::latest()->where('client_id', $client->id)->get();
-        $projectcount = count($projects);
-        return $projects;
+        $clients = Client::where('user_id', $user->id)->get();
+        foreach ($clients as $client){
+            // Get the clients projects 
+        $projects = Project::where('client_id', $client->id)->get();
+        }
+        return $projects->toArray();
     });
-    Route::get('api/get/briefs', [
-        'as' => 'api.briefs.get', 'uses' => 'BriefController@index'
-    ]);
-    Route::get('api/get/clientcount', [
-        'as' => 'api.clientcount.get', 'uses'=> 'ClientController@countClients'
-    ]);
-    Route::get('api/get/projectcount', [
-        'as' => 'api.projectcount.get', 'uses'=> 'ProjectController@countProjects'
-    ]);
-    Route::get('api/get/briefcount', [
-        'as' => 'api.briefcount.get', 'uses'=> 'BriefController@countBriefs'
-    ]);
-    Route::post('api/post/files', [
-        'as' => 'api.files.store', 'uses' => 'FileController@store'
-    ]);
-    Route::get('api/get/files', [
-        'as' => 'api.files.index', 'uses' => 'FileController@store'
-    ]);
-    Route::post('api/post/access', [
-        'as' => 'api.access.store', 'uses' => 'AccessController@store'
-    ]);
-    Route::get('api/get/access', [
-        'as' => 'api.access.index', 'uses' => 'AccessController@index'
-    ]);
+    Route::get('api/get/briefs', function(){
+        // Get the current signed in user
+        $user = Auth::user();
+        // Get the users clients
+        $clients = Client::where('user_id', $user->id)->get();
+        foreach ($clients as $client) {
+            $projects = Project::where('client_id', $client->id)->get(); 
+        }
+        // Get the clients projects
+        foreach ($projects as $project) {
+            $briefs = Brief::where('project_id', $project->id)->get();
+        }
+        return $briefs->toArray();
+    });
+    Route::get('api/get/clientcount', function(){
+        $clients = Client::latest()->get();
+        $clientcount = count($clients);
+        return $clientcount;
+    });
+    Route::get('api/get/projectcount', function(){
+        $projects = Project::latest()->get();
+        $projectcount = count($projects);
+        return $projectcount;
+    });
+    Route::get('api/get/briefcount', function(){
+        $briefs = Brief::latest()->get();
+        $briefcount = count($briefs);
+        return $briefcount;
+    });
+    Route::post('api/post/access', function(Request $request){
+        $this->validate($request, ['name' => 'required', 'email' => 'email']);
+        Access::create(
+            [
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+            ]
+        );
+    });
 });
