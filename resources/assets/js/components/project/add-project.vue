@@ -41,13 +41,14 @@ export default {
             }
         };
     },
-    props: [],
     created(){
         // Get all briefs for now - this should be changed later TEMP
         // focus first input;
         this.focusFirstInput();
         // Set the client_id of the new project data.
         this.getClientId();
+        // Get the project count
+        this.getProjectCount();
     },
     methods: {
         setProjectAdded: function () {
@@ -61,16 +62,11 @@ export default {
             this.getProjectCount();
             // Add the project id to parent vm
             this.$parent.currentProject.id = this.count + 1;
-            // Get project count and assign the current vm project id
-            this.getProjectCount();
-            // initialise a variable to assign the new data
-            this.newProjectData.client_id = this.$parent.currentClient.id;
             var request = this.newProjectData;
             // add the client to client to a client object on the parent view model
             this.$parent.currentProject.client_id = request.client_id;
             this.$parent.currentProject.name = request.name;
             this.$parent.currentProject.description = request.description;
-            this.$parent.currentProject.client_id = this.$parent.currentClient.id;
             // show thanks message
             this.submitted = true;
             //set showarea to false
@@ -81,7 +77,6 @@ export default {
             this.$parent.showBrief = true;
             //reset inputs
             this.newProjectData = {
-                id: null,
                 name: '',
                 description: '',
                 client_id: null
@@ -95,9 +90,10 @@ export default {
         getClientId: function () {
             this.newProjectData.client_id = this.$parent.currentClient.id;
         },
-        getProjectCount: function(){
+        getProjectCount: function() {
             this.$http.get('/api/get/projectcount').then(function (projectcount) {
-                this.count = projectcount.data;
+                var count = projectcount.data;
+                this.count = count;
             });
         }
     }

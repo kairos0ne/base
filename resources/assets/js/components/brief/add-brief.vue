@@ -4,7 +4,7 @@
             <h2 class="survey col-lg-offset-2 col-lg-8 col-md-8 col-sm-12"><i class="fa fa-quote-left grey-icon"></i>What people think of as the moment of discovery is really the discovery of the question - Jonas Salk.  <i class="fa fa-quote-right grey-icon"></i></h2>
             <div class="negative-space"></div>
             <form action="/api/post/briefs" method="POST" role="form" v-show="! submitted" v-ajax>
-            	<div class="form-group col-lg-offset-2" v-show=" ! overviewsubmitted">
+                <div class="form-group col-lg-offset-2" v-show=" ! overviewsubmitted">
                     <div class="col-md-8 col-lg-8 col-sm-12  right-inner-addon pull-left">
                     <div class="left-inner-addon pullright">
                         <img role="img" src="/svg/openbracket.svg"/>
@@ -33,6 +33,7 @@
                 submitted:false,
                 overviewsubmitted:false,
                 objectivesubmitted:false,
+                count:null,
                 newBriefData:{
                     overview:'',
                     objective:'',
@@ -49,6 +50,8 @@
             this.focusFirstInput();
             // Get project id from parent vm
             this.getProjectId();
+            // Fire the count method on page load 
+            this.getBriefCount();
             },
         methods: {
             setOverviewAdded: function () {
@@ -57,38 +60,42 @@
             onFormSubmit: function (e){
                 //Prevent default action
                 e.preventDefault();
-                // fire the getBriefCount function
+                // update the brief count
                 this.getBriefCount();
                 // initialise a variable to assign the new data
                 var request = this.newBriefData;
                 //Set the current brief on the parent vm
+                this.$parent.currentBrief.id = this.count + 1;
+                this.$parent.currentBrief.project_id = request.project_id;
                 this.$parent.currentBrief.overview = request.overview;
                 this.$parent.currentBrief.objective = request.objective;
+                // Change the showBrief value on the parent vm
+                this.$parent.showBrief = false;
                 // show thanks message
                 this.submitted = true;
                 //reset inputs
                 this.newBriefData = {
                     overview:'',
                     objective:'',
-                    project_id:null,
+                    project_id:null
                 };
                 // send ajax request
-                console.log(request);
                 this.$http.post('/api/post/briefs', request);
+                // Refresh the page and DOM 
+                
             },
             focusFirstInput: function() {
                 //add input focus
                 
             },
             getProjectId:function () {
-                this.newBriefData.project_id = this.$parent.currentProject.id;
+                this.newBriefData.project_id = this.$parent.currentProject.id;  
             },
             getBriefCount: function(){
                 this.$http.get('/api/get/briefcount').then(function (briefcount) {
                     //get the request data
                     var count = briefcount.data;
-                    // Assign it to the
-                    this.$parent.currentProject.id = count + 1;
+                    this.count = count;
                 });
             }
         }
