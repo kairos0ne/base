@@ -5,8 +5,7 @@
             method="POST" 
             role="form"  
             v-if="! submitted"
-            v-ajax
-            @submit="onSubmit"
+            @submit="onSubmitForm"
             >
             <div class="form-group">
                 <input 
@@ -58,14 +57,14 @@
         onSubmitForm: function(e){
             // prevent the deafult submit form submit
             e.preventDefault();
-            var person = this.newPerson;
+            var request = this.newPerson;
             // reset inputs
             this.newPerson = {name: '', email:''};
             // hide submit
             // show thanks message
             this.submitted = true;
             // send ajax request
-            this.$http.post('api/post/access', person)
+            this.$http.post('/api/post/access', request)
         }
     }
 }
