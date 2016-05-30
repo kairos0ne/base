@@ -39,7 +39,7 @@ class Project extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function brief()
+    public function briefs()
     {
         return $this->hasMany('App\Brief');
     }
