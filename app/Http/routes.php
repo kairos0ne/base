@@ -19,7 +19,6 @@ use App\Brief;
 
 Route::group(['middleware' => 'web'], function () {
 
-
     Route::auth();
     Route::resource('home', 'HomeController', array('except' => array('create', 'store', 'update', 'destroy')));
     Route::resource('/', 'WelcomeController', array('except' => array('update', 'destroy')));
@@ -35,27 +34,25 @@ Route::group(['middleware' => 'web'], function () {
 | This route group contains all the API routes for ajax/ recource requests
 | It is within the middleware group for defined in your HTTP
 | kernel and includes session state, CSRF protection, and more.
-|
 */
-
-    /**  All portfolios related api routes **/ 
+/**  All Portfolio related api routes **/ 
     Route::get('api/portfolios', function (){
+        // Get the portfolio data
         $portfolios = Portfolio::latest()->get();
         return $portfolios;
     });
     Route::get('api/portfolios/{id}', function (){
+        // Get single protfolio by id 
         $portfolio = Portfolio::findOrFail($id);
         return $portfolio;
     });
     Route::post('api/post/portfolios', [
+        // Persist the data with the PortfolioControllers store method - review 
         'as' => 'api.portfolio.store', 'uses' => 'PortfolioController@store'
     ]);
-    Route::post('api/post/briefs', [
-        'as' => 'api.briefs.store', 'uses' => 'BriefController@store'
-    ]);
-    Route::post('api/post/projects', [
-        'as' => 'api.briefs.store', 'uses' => 'ProjectController@store'
-    ]);
+
+
+/**  All Client related api routes **/ 
     Route::post('api/post/clients', [
         'as' => 'api.clients.store', 'uses' => 'ClientController@store'
     ]);
@@ -63,34 +60,58 @@ Route::group(['middleware' => 'web'], function () {
         // Get the current signed in user
         $user = Auth::user();
         // Get the users clients
-        $clients = Client::where('user_id', $user->id)->get();
+        $clients = $user->clients;
         return $clients->toArray();
     });
+
+/**  All Project related api routes **/ 
+    Route::post('api/post/projects', [
+        'as' => 'api.briefs.store', 'uses' => 'ProjectController@store'
+    ]);
     Route::get('api/get/projects', function (){
         // Get the current signed in user
         $user = Auth::user();
-        // Get the users clients
-        $clients = Client::where('user_id', $user->id)->get();
-        foreach ($clients as $client){
-            // Get the clients projects 
-        $projects = Project::where('client_id', $client->id)->get();
-        }
-        return $projects->toArray();
+        $clients = $user->clients;
+        // Loop through all clients and if the value is not null, return the projects
+        foreach ($clients as $client) {
+            if (null !== $client->projects) {
+                $projects = $client->projects;
+            }
+            return $projects;
+        }       
     });
+
+/**  All Brief related api routes **/ 
+    Route::post('api/post/briefs', [
+        'as' => 'api.briefs.store', 'uses' => 'BriefController@store'
+    ]);
     Route::get('api/get/briefs', function(){
         // Get the current signed in user
         $user = Auth::user();
         // Get the users clients
-        $clients = Client::where('user_id', $user->id)->get();
+        $clients = $user->clients;
+        // Lopp through clients and get the projects for each client and if the value is not null, return the projects
         foreach ($clients as $client) {
-            $projects = Project::where('client_id', $client->id)->get(); 
-        }
-        // Get the clients projects
-        foreach ($projects as $project) {
-            $briefs = Brief::where('project_id', $project->id)->get();
-        }
-        return $briefs->toArray();
+            if (null !== $client->projects) {
+                $projects = $client->projects;
+            }
+             // Loop through projects and get the briefs for each project and if the value is not null, return the projects
+            foreach ($projects as $project) {
+                if (null !== $project->briefs) {
+                    $briefs = $project->briefs;
+                }
+                // Return the briefs array 
+                return $briefs;
+            }
+        }        
     });
+/*
+|--------------------------------------------------------------------------
+| API routes count items
+|--------------------------------------------------------------------------
+| These routes contain the api values for item counts for persisting to the DB. 
+|
+*/
     Route::get('api/get/clientcount', function(){
         $clients = Client::latest()->get();
         $clientcount = count($clients);
@@ -106,6 +127,13 @@ Route::group(['middleware' => 'web'], function () {
         $briefcount = count($briefs);
         return $briefcount;
     });
+    /*
+|--------------------------------------------------------------------------
+| API routes request access - to be removed
+|--------------------------------------------------------------------------
+| For requesting access to the site prior to launchin it. 
+|
+*/
     Route::post('api/post/access', function(Request $request){
         $this->validate($request, ['name' => 'required', 'email' => 'email']);
         Access::create(
