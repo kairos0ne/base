@@ -52,7 +52,6 @@ $factory->define(App\Project::class, function (Faker\Generator $faker) {
         'client_id' => factory('App\Client')->create()->id,
         'name' => $faker->sentence(),
         'description' => $faker->paragraph(),
-        'session_token' => str_random(10),
     ];
 });
 $factory->define(App\Client::class, function (Faker\Generator $faker) {
@@ -60,7 +59,6 @@ $factory->define(App\Client::class, function (Faker\Generator $faker) {
         'user_id' => factory('App\User')->create()->id,
         'name' => $faker->sentence(),
         'business_area' => $faker->paragraph(),
-        'session_token' => str_random(10),
     ];
 });
 $factory->define(App\File::class, function (Faker\Generator $faker) {
