@@ -29,7 +29,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function client()
+    public function clients()
     {
         return $this->hasMany('App\Client');
     }
@@ -38,7 +38,7 @@ class User extends Authenticatable
      * User has many files but owns each
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function file()
+    public function files()
     {
         return $this->hasMany('App\File');
     }
