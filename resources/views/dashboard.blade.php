@@ -22,8 +22,8 @@
                             <a href="{filter}"><span class="fa fa-filter fa-pull-right"></a></span>
                         </li>
                         <li v-for="project in projectList" class="project_panel"><a href="#">
-                                <p id="project_panel_title">@{{ name }}<a href="{project_URL}"><span class="fa fa-pencil-square fa-lg fa-pull-right"></a></span></p></a>
-                            <p id="project_panel_client">Client:</p>
+                                <p id="project_panel_title">@{{ project.name }}<a href="{project_URL}"><span class="fa fa-pencil-square fa-lg fa-pull-right"></a></span></p></a>
+                            <p id="project_panel_client">Description: @{{ project.description }}  </p>
                             <p id="project_panel_BusUnit"></p>
                             <div id="progress_bar_ID"class="progress">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
