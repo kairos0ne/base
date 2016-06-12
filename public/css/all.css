@@ -3727,6 +3727,14 @@
     -webkit-animation-name: slideOutUp;
     animation-name: slideOutUp;
 }
+
+li.client_panel {
+    display: block;
+    position: relative;
+    margin-left: 13px;
+    padding-bottom: 5px;
+}
+
 #foundation {
     float: left;
     margin: 0px 10px 0px 0px;
@@ -3755,7 +3763,6 @@
 
 p {
     line-height: 2em;
-    padding-bottom: 10px;
 }
 
 .navbar-default {
@@ -4133,12 +4140,12 @@ li.project_panel{
     position: relative;
     display: block;
     padding: 10px 15px;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
     background-color: #fff;
 }
 p#project_panel_client,#project_panel_BusUnit  {
     font-size: 12px;
-    margin:0 0 5px;
+    margin:0 0 0px;
 }
 p#project_panel_jobNum  {
     font-size: 9px;
@@ -4150,7 +4157,8 @@ li#project_title.list-group-item:first-child {
     background-color: #e4e7e3;
 }
 
-div#progress_bar_ID.progress { height: 20px;
+div#progress_bar_ID.progress { 
+    height: 20px;
     margin-bottom: 5px;
     overflow: hidden;
     background-color: #f5f5f5;
@@ -4179,5 +4187,7 @@ li.job_list{
 // Rules for using icons as white on a dark background.
    .material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+
 
 /*# sourceMappingURL=all.css.map */
