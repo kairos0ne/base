@@ -40,6 +40,17 @@ import selectclient from './components/client/selectclient.vue'
 import addproject from './components/project/add-project.vue'
 import selectproject from './components/project/selectproject.vue'
 
+//Filter Projects By ID Filter 
+Vue.filter('projectID', function(value, id){
+    return value.filter(function(item){
+        return item.project_id == id;
+    });
+});
+Vue.filter('clientID', function(value, client_id){
+    return value.filter(function(item){
+        return item.id == client_id;
+    });
+});
 
 // Main vue application instance
 new Vue({
@@ -86,22 +97,28 @@ data: {
     
     },
     components: {
-        persona:persona,
-        portfolios:portfolios,
-        work: work,
-        addwork:addwork,
-        research: research,
-        architecture: architecture,
+        // Client Components 
+        addclient:addclient,
+        selectclient: selectclient,
+        // Project Components 
+        addproject: addproject,
+        selectproject: selectproject,
+        // Brief Components 
+        addbrief: addbrief,
+        selectbrief:selectbrief,
+        // Page Asset Components 
         foundation: foundation,
+        research: research,
+        persona:persona,
+        architecture: architecture,
         earlyaccess: earlyaccess,
         underconstruction:underconstruction,
         introduction: introduction,
-        addbrief: addbrief,
-        selectbrief:selectbrief,
-        addproject: addproject,
-        selectproject: selectproject,
-        addclient:addclient,
-        selectclient: selectclient
+        //Portfolio Components - Remove 
+        portfolios:portfolios,
+        work: work,
+        addwork:addwork,
+        
     },
     ready() {
         this.getDashboardData();
@@ -118,7 +135,15 @@ data: {
              this.briefList = briefs.data;
          })
      },
-     
+        setSelectedClient: function(client) {
+            this.currentClient = client;
+        },
+        setSelectedProject: function(project) {
+            this.currentProject = project;
+        },
+        setSelectedBrief: function(brief) {
+            this.currentBrief = brief;
+        },
     }
 
 });
