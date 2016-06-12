@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <h2 class="survey col-lg-offset-2 col-lg-8 col-md-8 col-sm-12">Before we get started there are a few details we'll need to setup. It won't take a minute, follow the steps.</h2>
+            <h2 class="survey col-lg-offset-2 col-lg-8 col-md-8 col-sm-12">Add the client details.</h2>
             <div class="negative-space"></div>
             <form action="" method="POST" role="form" v-show="! submitted">
                 <div class="form-group col-lg-offset-2" v-show="showname">
