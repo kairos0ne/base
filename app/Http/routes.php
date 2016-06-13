@@ -71,14 +71,16 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('api/get/projects', function (){
         // Get the current signed in user
         $user = Auth::user();
+        // Get the users clients
         $clients = $user->clients;
-        // Loop through all clients and if the value is not null, return the projects
+        $projects = array();
         foreach ($clients as $client) {
-            if (null !== $client->projects) {
-                $projects = $client->projects;
+            $items = $client->projects;
+            foreach ($items as $item) {
+                array_push($projects, $item);
             }
-            return $projects;
-        }       
+        }
+        return $projects;
     });
 
 /**  All Brief related api routes **/ 
@@ -91,19 +93,25 @@ Route::group(['middleware' => 'web'], function () {
         // Get the users clients
         $clients = $user->clients;
         // Lopp through clients and get the projects for each client and if the value is not null, return the projects
+        $projects = array();
+        $briefs = array();
         foreach ($clients as $client) {
             if (null !== $client->projects) {
-                $projects = $client->projects;
+                $items = $client->projects;
             }
-             // Loop through projects and get the briefs for each project and if the value is not null, return the projects
-            foreach ($projects as $project) {
-                if (null !== $project->briefs) {
-                    $briefs = $project->briefs;
-                }
-                // Return the briefs array 
-                return $briefs;
+            foreach ($items as $item) {
+                array_push($projects, $item);   
             }
-        }        
+        }
+        foreach ($projects as $project) {
+            if (null !== $project->briefs) {
+                $briefitems = $project->briefs;
+            }
+            foreach ($briefitems as $briefitem){
+                array_push($briefs, $briefitem);
+            }
+        }       
+        return $briefs;     
     });
 /*
 |--------------------------------------------------------------------------
