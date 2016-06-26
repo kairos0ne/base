@@ -40,7 +40,7 @@ class ClientController extends Controller
         // Count all clients
         $allclientcount = count($allclients);
         //Count all clients to assign the new send the items id to vm
-        return view('application', compact('clients', 'user', 'clientcount', 'allclientcount'));
+        return view('client.index', compact('clients', 'user', 'clientcount', 'allclientcount'));
     }
 
     /**
@@ -51,7 +51,7 @@ class ClientController extends Controller
     public function show($id)
     {
         $client = Client::findOrFail($id)->get();
-        return view('application', compact('client'));
+        return view('client.show', compact('client'));
     }
 
     /**
@@ -60,7 +60,7 @@ class ClientController extends Controller
      */
     public function create ()
     {
-        return view('application');
+        return view('client.create');
     }
     /**
      * Store a client in the database
@@ -76,6 +76,7 @@ class ClientController extends Controller
             'business_area' => $request->input('business_area'),
             'user_id' => $request->input('user_id'),
         ]);
+        return view('project.create');
     }
 
 }

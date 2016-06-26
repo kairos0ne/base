@@ -35,7 +35,7 @@ class ApplicationController extends Controller
         // Get the current signed in user 
         $user = Auth::user();
         // Get the users clients 
-        $clients = Client::latest()->where('user_id', $user->id )->get();  
+        $clients = $user->clients;  
         // Count the clients and and assign that to a variable 
         $clientcount = count($clients);
         // If clients exist, return the dashboard with clients and user data 
@@ -46,6 +46,22 @@ class ApplicationController extends Controller
         elseif ($clientcount < 1) {
            return view('application', compact('user')); 
         } 
+    }
+     /**
+     * Store a client in the database
+     * include validation on for required fields
+     * @param  Illuminate\Http\Request  $request
+     * @return Response
+     */
+    public  function store(Request $request)
+    {
+        $this->validate($request, ['name' => 'required', 'business_area' => 'required', 'user_id' => 'required']);
+        Client::create([
+            'name' => $request->input('name'),
+            'business_area' => $request->input('business_area'),
+            'user_id' => $request->input('user_id'),
+        ]);
+        return view('project.create');
     }
     
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Access;
+use Illuminate\Support\Facades\Auth;
 
 class AccessController extends Controller
 {
@@ -32,5 +33,19 @@ class AccessController extends Controller
     public function show($id)
     {
        //Add if required
+    }
+    /**
+     * Store a access request in DB 
+     * include validation on for required fields
+     * @param  Illuminate\Http\Request  $request
+     * @return Response
+     */
+    public  function store(Request $request)
+    {
+        $this->validate($request, ['name' => 'required', 'email' => 'email']);
+        Access::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+        ]);
     }
 }

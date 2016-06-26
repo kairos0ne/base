@@ -1,19 +1,20 @@
-@extends ('layouts.app')
-@section('content')
+<template>
 <div id="dashboard">
     <div id="wrapper">
         <!-- Start Main Container -->
         <div id="main_content_container" class="container-fluid">
             <colgroup>
+            <!-- Left Bar  -->
                 <div id="sidebar_container" class="col-md-2 col-sm-12 col-lg-2">
                     <!-- List Clients  -->
                     <div class="list-group ">
                         <li  class="list-group-item h4">Clients</li>
                         <li class="client_panel" v-for="client in clientList | orderBy 'name'">@{{ client.name }}</li>
                     </div>
-                    <!-- End favourites function -->
+                    <!-- End Clients Function -->
 
                 </div>
+                <!-- Right Bar  -->
                 <div id="content_bar_container" class="col-md-3 col-sm-12 col-lg-3">
                     <ul class="list-group">
                         <li id="project_title" class="list-group-item h4 ">Projects
@@ -38,11 +39,10 @@
                                 @{{ brief.overview }}
                                 </li >
                             </ul>
-                        </li>
-                        
+                        </li>    
                     </ul>
                 </div>
-                <!-- End function for project panels -->
+                <!-- Main Content Container  -->
                 <div id="content_pane_container" class="col-md-7 col-lg-7 col-sm-12">
                     <h4>Brief</h4>
                     <h3>@{{ currentBrief.overview }}</h3>
@@ -52,4 +52,71 @@
         </div>
     </div>
 </div>
-@endsection
+</template>
+<script>
+// Client - resources/assets/js/components/client
+import addclient from './components/client/add-client.vue'
+import showclient from './components/client/show-client.vue'
+import editclient from './components/client/edit-client.vue'
+import listclient from './components/client/list-client.vue'
+
+export default {
+
+    data (){
+        return {
+            currentClient:{
+                id:null,
+                name:'',
+                business_area:'',
+                user_id:null
+            },
+            currentBrief:{
+            id:null,
+            overview:'',
+            objective:'',
+            project_id:null
+
+            },
+            currentProject:{
+            id:null,
+            name:'',
+            description:'',
+            client_id:null
+            },
+        }
+    };
+    
+    components: {
+        // Client Components 
+        addclient: addclient,
+        showclient: showclient,
+        editclient: editclient,
+        listclient: listclient,
+    },
+
+    methods: {
+     getUserData: function () {
+         this.$http.get('/api/get/clients').then(function(clients){
+             this.clientList = clients.data;
+         });
+         this.$http.get('/api/get/projects').then(function (projects) {
+             this.projectList = projects.data;
+         });
+         this.$http.get('/api/get/briefs').then(function (briefs) {
+             this.briefList = briefs.data;
+         })
+     },
+        setSelectedClient: function(client) {
+            this.currentClient = client;
+        },
+        setSelectedProject: function(project) {
+            this.currentProject = project;
+        },
+        setSelectedBrief: function(brief) {
+            this.currentBrief = brief;
+        },
+    }
+
+}
+
+</script>

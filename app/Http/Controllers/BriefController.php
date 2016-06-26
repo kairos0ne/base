@@ -55,5 +55,6 @@ class BriefController extends Controller
             'objective' => $request->input('objective'),
             'project_id' => $request->input('project_id')
         ]);
+        return redirect('application');
     }
 }
