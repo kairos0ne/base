@@ -3,7 +3,7 @@
         <div class="container">
             <h2 class="survey col-lg-offset-2 col-lg-8 col-md-8 col-sm-12"><i class="fa fa-quote-left grey-icon"></i>What people think of as the moment of discovery is really the discovery of the question - Jonas Salk.  <i class="fa fa-quote-right grey-icon"></i></h2>
             <div class="negative-space"></div>
-            <form action="/api/post/briefs" method="POST" role="form" v-show="! submitted" v-ajax>
+            <form id="addbriefform" action="" method="POST" role="form" v-show="! submitted" v-ajax>
                 <div class="form-group col-lg-offset-2" v-show=" ! overviewsubmitted">
                     <div class="col-md-8 col-lg-8 col-sm-12  right-inner-addon pull-left">
                     <div class="left-inner-addon pullright">
@@ -86,6 +86,7 @@
             },
             focusFirstInput: function() {
                 //add input focus
+
                 
             },
             getProjectId:function () {

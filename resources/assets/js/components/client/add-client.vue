@@ -2,13 +2,14 @@
     <div>
         <div class="container">
             <h2 class="survey col-lg-offset-2 col-lg-8 col-md-8 col-sm-12">Add the client details.</h2>
-            <div class="negative-space"></div>
-            <form action="" method="POST" role="form" v-show="! submitted">
+            <div class="negative-space">
+            </div>
+            <form method="POST" action="" role="form" v-show="! submitted">
                 <div class="form-group col-lg-offset-2" v-show="showname">
                     <div class="col-md-8 col-lg-8 col-sm-12  right-inner-addon pull-left">
                         <div class="left-inner-addon pullright">
                             <img role="img" src="/svg/openbracket.svg"/>
-                            <input type="text" class="form-control custom_text_area" name="name" id="name" v-model="newClientData.name" placeholder="Client name" v-on:keyup.enter="setNameAdded" autocomplete="off"/>
+                            <input type="text" v-focus class="form-control custom_text_area" name="name" id="name" v-model="newClientData.name" placeholder="Client name" v-on:keyup.enter="setNameAdded" autocomplete="off"/>
                         </div>
                         <img role="img" src="/svg/closebracket.svg"/>
                     </div>
@@ -17,7 +18,7 @@
                     <div class="col-md-8 col-lg-8 col-sm-12  right-inner-addon pull-left">
                         <div class="left-inner-addon pullright">
                             <img role="img" src="/svg/openbracket.svg"/>
-                            <input type="text" class="form-control custom_text_area" name="business_area" id="business_area" v-model="newClientData.business_area" placeholder="What is the core bsuiness focus" v-on:keyup.enter="onFormSubmit" autocomplete="off"/>
+                            <input  type="text" class="form-control custom_text_area" name="business_area" id="business_area" v-model="newClientData.business_area" placeholder="What is the core bsuiness focus" v-on:keyup.enter="onFormSubmit" autocomplete="off"/>
                         </div>
                         <img role="img" src="/svg/closebracket.svg"/>
                     </div>
@@ -27,6 +28,7 @@
     </div>
 </template>
 <script>
+
 export default {
     data(){
         return {
@@ -46,12 +48,10 @@ export default {
         'userid'
     ],
     created(){
-        
-        // focus first input;
-        this.focusFirstInput();
+        // Get the client Count 
         this.getClientCount();
-        
-
+        // focus first input
+        this.focusFirstInput();
     },
     methods: {
         setNameAdded: function () {
@@ -90,8 +90,9 @@ export default {
 
         },
         focusFirstInput: function() {
-            console.log('this fuction is firing on page create');
             // Set overview class as :focus
+
+            
         },
         getClientCount: function(){
             this.$http.get('/api/get/clientcount').then(function (clientcount) {
