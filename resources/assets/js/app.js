@@ -8,13 +8,17 @@ Vue.use(VueRouter)
 //set environment to debug
 Vue.config.debug = true;
 //include CSRF Token in header of view instance
-Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#csrf-token').getAttribute('content');
+Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#csrf_token').getAttribute('content');
 
 // Directives
-
+Vue.directive('focus', {
+    bind: function () {
+        this.el.focus();
+    }
+});
 // Note include aws save to s3 directive at a later date
 
-// Import Components for the Application, these are the componants that belong 
+// Import Components for the Application, these are the components that belong 
 // to the main vue instance and is Global for the site and bound to the vueapplication div
 
 // Portfolio - resources/assets/js/components/portfolio
@@ -32,13 +36,25 @@ import introduction from './components/page_assets/introduction.vue'
 
 // Brief - resources/assets/js/components/brief
 import addbrief from './components/brief/add-brief.vue'
-import selectbrief from './components/brief/selectbrief.vue'
+import showbrief from './components/brief/show-brief.vue'
+import editbrief from './components/brief/edit-brief.vue'
+import listbrief from './components/brief/list-brief.vue'
 // Client - resources/assets/js/components/client
 import addclient from './components/client/add-client.vue'
-import selectclient from './components/client/selectclient.vue'
+import showclient from './components/client/show-client.vue'
+import editclient from './components/client/edit-client.vue'
+import listclient from './components/client/list-client.vue'
 // Project - recourses/js/components/project
 import addproject from './components/project/add-project.vue'
-import selectproject from './components/project/selectproject.vue'
+import showproject from './components/project/show-project.vue'
+import editproject from './components/project/edit-project.vue'
+import listproject from './components/project/list-project.vue'
+
+// Project - recourses/js/components/project
+import viewprojects from './components/views/view-project.vue'
+import viewclients from './components/views/view-project.vue'
+import viewbriefs from './components/project/edit-project.vue'
+import listproject from './components/project/list-project.vue'
 
 //Filter Projects By ID Filter 
 Vue.filter('projectID', function(value, id){
@@ -52,18 +68,15 @@ Vue.filter('clientID', function(value, client_id){
     });
 });
 
+
+
+
 // Main vue application instance
 new Vue({
 
     el: '#vueapplication',
-    http: {
-        headers: {
-            // Token is currently stored in a global variable 
-            // Use the below method if you'd like to change this to be parsed on the form
-            // 'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-        }
-    },
-data: {
+
+    data: {
         formData:[],
         user: null,
         clientList:[],
@@ -93,19 +106,25 @@ data: {
             user_id:null
         }
     },
-    props: {
-    
+    directives: {
+        focus: focus
     },
     components: {
         // Client Components 
-        addclient:addclient,
-        selectclient: selectclient,
+        addclient: addclient,
+        showclient: showclient,
+        editclient: editclient,
+        listclient: listclient,
         // Project Components 
         addproject: addproject,
-        selectproject: selectproject,
+        showproject: showproject,
+        editproject: editproject,
+        listproject: listproject,
         // Brief Components 
         addbrief: addbrief,
-        selectbrief:selectbrief,
+        showbrief:showbrief,
+        editbrief: editbrief,
+        listbrief: listbrief,
         // Page Asset Components 
         foundation: foundation,
         research: research,
