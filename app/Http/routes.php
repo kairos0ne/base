@@ -23,8 +23,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::resource('home', 'HomeController', array('except' => array('create', 'store', 'update', 'destroy')));
     Route::resource('/', 'WelcomeController', array('except' => array('update', 'destroy')));
     Route::resource('portfolio', 'PortfolioController');
-    Route::resource('app', 'ApplicationController');
+    Route::resource('application', 'ApplicationController');
+    Route::resource('clients', 'ClientController');
+    Route::resource('projects', 'ProjectController');
+    Route::resource('briefs', 'ClientController');
     Route::resource('documentation', 'DocumentationController');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -142,13 +146,8 @@ Route::group(['middleware' => 'web'], function () {
 | For requesting access to the site prior to launchin it. 
 |
 */
-    Route::post('api/post/access', function(Request $request){
-        $this->validate($request, ['name' => 'required', 'email' => 'email']);
-        Access::create(
-            [
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-            ]
-        );
-    });
+    Route::post('api/post/access', [
+        // Persist the data with the PortfolioControllers store method - review 
+        'as' => 'api.access.store', 'uses' => 'AccessController@store'
+    ]);
 });
