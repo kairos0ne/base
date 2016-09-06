@@ -50,7 +50,7 @@ export default {
         // Get the client Count 
         this.getClientCount();
         // focus first input
-        this.getUserId();
+        this.getUser();
     },
     methods: {
         setNameAdded: function () {
@@ -95,9 +95,13 @@ export default {
                 this.count = count;
             });
         },
-        getUserId: function(){
-            this.userid = this.$parent.user.id;
-        },
+        getUser: function () {
+                this.$http.get('/api/get/user').then(function (userdetails) {
+                this.userid = userdetails.data.id;
+                this.newClientData.user_id = this.userid;
+                });
+            },  
     }
 }
+
 </script>

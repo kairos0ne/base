@@ -3,7 +3,7 @@
         <div id="wrapper">
             <div class="container">
                 <div id="what" class="page-header col-lg-12 col-md-12 col-sm-12 ">
-                    <h1>Welcome {{ user.name }}.<small> I see this is your first time on the site.  </small></h1>
+                    <h1>Welcome {{ username }}.<small> I see this is your first time on the site.  </small></h1>
                     <p>I hope the next couple of steps help you define a strategic approach to developing online tools. Before we get started there are a few details we'll need to setup. It won't take a minute, follow the steps.</p>
                 </div>
             </div>
@@ -23,7 +23,6 @@ import addproject from './../project/add-project.vue'
         data (){
             return {
                 formData:[],
-                user: {},
                 clientList:[],
                 projectList:[],
                 briefList:[],
@@ -33,6 +32,8 @@ import addproject from './../project/add-project.vue'
                 currentClient:{},
                 currentProject:{},
                 currentBrief:{},
+                userid:null,
+                username:'',
             }
         },
         components:{
@@ -46,7 +47,8 @@ import addproject from './../project/add-project.vue'
         methods: {
             getUser: function () {
                 this.$http.get('/api/get/user').then(function (userdetails) {
-                this.user = userdetails.data;
+                this.userid = userdetails.data.id;
+                this.username = userdetails.data.name;
                 });
             },
         }   

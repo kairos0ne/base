@@ -3,7 +3,7 @@
         <div class="container">
             <h2 class="survey col-lg-offset-2 col-lg-8 col-md-8 col-sm-12"><i class="fa fa-quote-left grey-icon"></i>What people think of as the moment of discovery is really the discovery of the question - Jonas Salk.  <i class="fa fa-quote-right grey-icon"></i></h2>
             <div class="negative-space"></div>
-            <form id="addbriefform" action="" method="POST" role="form" v-show="! submitted" v-ajax>
+            <form id="addbriefform" action="" method="POST" role="form" v-show="! submitted">
                 <div class="form-group col-lg-offset-2" v-show=" ! overviewsubmitted">
                     <div class="col-md-8 col-lg-8 col-sm-12  right-inner-addon pull-left">
                     <div class="left-inner-addon pullright">
@@ -41,14 +41,8 @@
                 }
             }
         },
-        props: [
-            'projectid'
-        ],
         created(){
-            // Get all briefs for now - this should be changed later TEMP
-           // focus first input;
-            this.focusFirstInput();
-            // Get project id from parent vm
+            // Get project id from parent component
             this.getProjectId();
             // Fire the count method on page load 
             this.getBriefCount();
@@ -82,11 +76,7 @@
                 // send ajax request
                 this.$http.post('/api/post/briefs', request);
                 // Refresh the page and DOM 
-                
-            },
-            focusFirstInput: function() {
-                //add input focus
-
+                this.$router.go('/dashboard');
                 
             },
             getProjectId:function () {
