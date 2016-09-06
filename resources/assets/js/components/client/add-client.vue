@@ -9,7 +9,7 @@
                     <div class="col-md-8 col-lg-8 col-sm-12  right-inner-addon pull-left">
                         <div class="left-inner-addon pullright">
                             <img role="img" src="/svg/openbracket.svg"/>
-                            <input type="text" v-focus class="form-control custom_text_area" name="name" id="name" v-model="newClientData.name" placeholder="Client name" v-on:keyup.enter="setNameAdded" autocomplete="off"/>
+                            <input id="clientInput" type="text" class="form-control custom_text_area" name="name" id="name" v-model="newClientData.name" placeholder="Client name" v-on:keyup.enter="setNameAdded" autocomplete="off"/>
                         </div>
                         <img role="img" src="/svg/closebracket.svg"/>
                     </div>
@@ -37,6 +37,7 @@ export default {
             showarea:false,
             clients:[],
             count:null,
+            userid:null,
             newClientData: {
                 name:'',
                 business_area:'',
@@ -44,14 +45,12 @@ export default {
             }
         };
     },
-    props: [
-        'userid'
-    ],
+
     created(){
         // Get the client Count 
         this.getClientCount();
         // focus first input
-        this.focusFirstInput();
+        this.getUserId();
     },
     methods: {
         setNameAdded: function () {
@@ -89,18 +88,16 @@ export default {
             this.$http.post('/api/post/clients', request);
 
         },
-        focusFirstInput: function() {
-            // Set overview class as :focus
-
-            
-        },
         getClientCount: function(){
             this.$http.get('/api/get/clientcount').then(function (clientcount) {
                 //get the request
                 var count = clientcount.data;
                 this.count = count;
             });
-        }
+        },
+        getUserId: function(){
+            this.userid = this.$parent.user.id;
+        },
     }
 }
 </script>

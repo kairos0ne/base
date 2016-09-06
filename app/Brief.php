@@ -33,5 +33,22 @@ class Brief extends Model
     {
         return $this->belongsTo('App\Project');
     }
-
+    /**
+     * Brief belongs to many files
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function files()
+    {
+        return $this->belongsToMany('App\File');
+    }
+    /**
+     * Brief belongs to many files
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function features()
+    {
+        return $this->hasMany('App\Feature');
+    }
 }

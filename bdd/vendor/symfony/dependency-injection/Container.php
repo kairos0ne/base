@@ -78,8 +78,6 @@ class Container implements IntrospectableContainerInterface, ResettableContainer
     private $underscoreMap = array('_' => '', '.' => '_', '\\' => '_');
 
     /**
-     * Constructor.
-     *
      * @param ParameterBagInterface $parameterBag A ParameterBagInterface instance
      */
     public function __construct(ParameterBagInterface $parameterBag = null)
@@ -323,6 +321,11 @@ class Container implements IntrospectableContainerInterface, ResettableContainer
                 }
 
                 throw $e;
+            } catch (\Throwable $e) {
+                unset($this->loading[$id]);
+                unset($this->services[$id]);
+
+                throw $e;
             }
 
             unset($this->loading[$id]);
@@ -375,9 +378,8 @@ class Container implements IntrospectableContainerInterface, ResettableContainer
     public function getServiceIds()
     {
         $ids = array();
-        $r = new \ReflectionClass($this);
-        foreach ($r->getMethods() as $method) {
-            if (preg_match('/^get(.+)Service$/', $method->name, $match)) {
+        foreach (get_class_methods($this) as $method) {
+            if (preg_match('/^get(.+)Service$/', $method, $match)) {
                 $ids[] = self::underscore($match[1]);
             }
         }

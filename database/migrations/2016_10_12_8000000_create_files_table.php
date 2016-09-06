@@ -15,13 +15,16 @@ class CreateFilesTable extends Migration
         Schema::create('files', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('path');
-            $table->integer('portfolio_id')->unsigned();
-            $table->integer('project_id')->unsigned();
-            $table->integer('client_id')->unsigned();
-            $table->integer('brief_id')->unsigned();
-            $table->integer('user_id')->unsinged();
-            $table->string('type');
+            $table->string('extension');
+            $table->string('url');
+            $table->timestamps();
+
+        });
+        Schema::create('brief_files', function (Blueprint $table) {
+            $table->integer('brief_id')->unsigned()->index();
+            $table->foreign('brief_id')->references('id')->on('briefs')->onDelete('cascade');
+            $table->integer('file_id')->unsigned()->index();
+            $table->foreign('file_id')->references('id')->on('files')->onDelete('cascade');
             $table->timestamps();
 
         });
@@ -35,5 +38,6 @@ class CreateFilesTable extends Migration
     public function down()
     {
         Schema::drop('files');
+        Schema::drop('brief_files');
     }
 }

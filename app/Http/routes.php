@@ -21,25 +21,31 @@ Route::group(['middleware' => 'web'], function () {
 
     Route::auth();
     Route::resource('home', 'HomeController', array('except' => array('create', 'store', 'update', 'destroy')));
-    Route::resource('/', 'WelcomeController', array('except' => array('update', 'destroy')));
-    Route::resource('portfolio', 'PortfolioController');
-    Route::resource('application', 'ApplicationController');
-    Route::resource('clients', 'ClientController');
-    Route::resource('projects', 'ProjectController');
-    Route::resource('briefs', 'ClientController');
-    Route::resource('documentation', 'DocumentationController');
+    Route::resource('/', 'HomeController', array('except' => array('create', 'store', 'update', 'destroy')));
+
 
 
 /*
 |--------------------------------------------------------------------------
-| API routes for ajax post/requests
+| REST API Routes for Clients, Projects, Briefs
 |--------------------------------------------------------------------------
 |
 | This route group contains all the API routes for ajax/ recource requests
 | It is within the middleware group for defined in your HTTP
 | kernel and includes session state, CSRF protection, and more.
 */
-/**  All Portfolio related api routes **/ 
+
+/**
+ * Get user
+ */
+
+    Route::get('api/get/user', function(){
+        $user = Auth::user();
+        return $user;
+    });
+/**
+ * Portfolio Rest API Routes
+ */
     Route::get('api/portfolios', function (){
         // Get the portfolio data
         $portfolios = Portfolio::latest()->get();
@@ -70,7 +76,7 @@ Route::group(['middleware' => 'web'], function () {
 
 /**  All Project related api routes **/ 
     Route::post('api/post/projects', [
-        'as' => 'api.briefs.store', 'uses' => 'ProjectController@store'
+        'as' => 'api.projects.store', 'uses' => 'ProjectController@store'
     ]);
     Route::get('api/get/projects', function (){
         // Get the current signed in user

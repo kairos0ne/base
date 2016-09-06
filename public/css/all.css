@@ -3778,33 +3778,14 @@ p {
 
 .panel-default > .panel-heading {
     padding: 10px 15px;
-    background-color: transparent; }
+    background-color: transparent;
+
+}
 
 .panel {
     border-radius: 0px; }
 
-.btn-primary {
-    background-color: transparent;
-    color: #888888;
-    border-color: #ddd;
-    border-radius: 0px;
-}
 
-.btn-primary:hover {
-    background-color: transparent;
-    color: #888888;
-    border-color: #ddd;
-    border-radius: 0px;
-}
-.btn {
-    border-radius: 0px;
-}
-.btn-primary:active .btn-primary:hover .btn-primary:focus .btn-primary:visited {
-    background-color: transparent;
-    color: #888888;
-    border-color: #ddd;
-    border-radius: 0px;
-}
 .h1, .h2, .h3, h1, h2, h3 {
     margin-top: 0px;
     margin-bottom: 10px;
@@ -4079,7 +4060,8 @@ html,body {
     background-color: #e4e7e3;
 }
 #content_pane_container {
-    margin-top: 10px;
+    margin-left: 0px;
+    padding-left: 0px;
 
 }
 
@@ -4100,7 +4082,7 @@ html,body {
 /*Start navbar styling */
 .navbar{
     border-radius: 0px;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
 }
 
 li.list-group-item {
@@ -4189,5 +4171,16 @@ li.job_list{
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
 
-
+li#briefItem {
+    display: block;
+    padding-bottom: 0px;
+}
+#page_content_brief {
+    border-top: 5px solid #97d700;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
 /*# sourceMappingURL=all.css.map */

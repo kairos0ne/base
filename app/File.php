@@ -12,7 +12,7 @@ class File extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id','brief_id', 'portfolio_id', 'project_id', 'client_id', 'name','path','type'
+        'name','type','extension','brief_id'
     ];
 
     /**
@@ -25,14 +25,23 @@ class File extends Model
     ];
 
     /**
-     * File belongs to user
+     * File belongs to many briefs
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function file()
+    public function briefs()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsToMany('App\Brief');
     }
-   
+
+    /**
+     * File belongs to many features
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function briefs()
+    {
+        return $this->belongsToMany('App\Feature');
+    }
     
 }

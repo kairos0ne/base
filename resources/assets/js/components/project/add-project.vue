@@ -17,7 +17,7 @@
                     <div class="col-md-8 col-lg-8 col-sm-12  right-inner-addon pull-left">
                         <div class="left-inner-addon pullright">
                             <img role="img" src="/svg/openbracket.svg"/>
-                            <input type="text" v-focus class="form-control custom_text_area" name="description" id="decription" v-model="newProjectData.description" placeholder="What is the core bsuiness focus" v-on:keyup.enter="onFormSubmit" autocomplete="off"/>
+                            <input type="text" class="form-control custom_text_area" name="description" id="decription" v-model="newProjectData.description" placeholder="What is the core bsuiness focus" v-on:keyup.enter="onFormSubmit" autocomplete="off"/>
                         </div>
                         <img role="img" src="/svg/closebracket.svg"/>
                     </div>
@@ -44,9 +44,6 @@ export default {
     },
     created(){
         // Get all briefs for now - this should be changed later TEMP
-        // focus first input;
-        this.focusFirstInput();
-        // Set the client_id of the new project data.
         this.getClientId();
         // Get the project count
         this.getProjectCount();
@@ -85,9 +82,6 @@ export default {
             };
             // send ajax request
             this.$http.post('/api/post/projects', request);
-        },
-        focusFirstInput: function () {
-
         },
         getClientId: function () {
             this.newProjectData.client_id = this.$parent.currentClient.id;

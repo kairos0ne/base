@@ -37,7 +37,7 @@ $factory->define(App\Brief::class, function (Faker\Generator $faker) {
         'project_id' => factory('App\Project')->create()->id,
         'overview' => $faker->paragraph(),
         'objective' => $faker->paragraph(),
-        'session_token' => str_random(10),
+
     ];
 });
 $factory->define(App\Access::class, function (Faker\Generator $faker) {

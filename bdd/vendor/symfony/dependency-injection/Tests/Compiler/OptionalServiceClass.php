@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-class APCUIterator extends APCIterator
+namespace Symfony\Component\DependencyInjection\Tests\Compiler;
+
+use Symfony\Bug\NotExistClass;
+
+class OptionalServiceClass extends NotExistClass
 {
-    public function __construct($search = null, $format = APC_ITER_ALL, $chunk_size = 100, $list = APC_LIST_ACTIVE)
-    {
-        parent::__construct('user', $search, $format, $chunk_size, $list);
-    }
 }

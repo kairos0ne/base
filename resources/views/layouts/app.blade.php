@@ -34,7 +34,7 @@
 </head>
 
 <body>
-<div id="vueapplication">
+<div id="app">
     <div>
         <nav class="navbar navbar-default">
             <div class="container">
@@ -58,48 +58,53 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ url('/home') }}">Foundation</a></li>
-
-                        <li><a href="{{ url('/application') }}">Getting Started</a></li>
-                        <li><a href="{{ url('/documentation') }}">Documentation</a></li>
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ url('/login') }}">Login</a></li>
-                            <li><a href="{{ url('/register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-                                    <li><a href="{{ url('/user') }}"><i class="fa fa-btn fa-sign-out"></i>Account</a></li>
-                                </ul>
-                            </li>
+                        <li><a v-link="{ path: '/foundation' }">Foundation</a></li>
+                        
+                        <li><a v-link="{ path: '/introduction' }">Getting Started</a></li>
+                        @if(isset($clients))
+                        <li><a v-link="{ path: '/dashboard' }">Dashboard</a></li>
                         @endif
+                        <li><a v-link="{ path: '/documentation' }">Documentation</a></li>
                     </ul>
-                </div>
-            </div>
-        </nav>
-        @yield('content')
-        <!-- JavaScripts -->
-        <script src="/js/jquery/jquery-2.2.2.js"></script>
-        <script src="/js/bootstrap/bootstrap.js"></script>
-        <script src="/js/bundle.js"></script>
-        <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        </script>
-    </div>
+
+<!-- Right Side Of Navbar -->
+<ul class="nav navbar-nav navbar-right">
+<!-- Authentication Links -->
+@if (Auth::guest())
+    <li><a href="{{ url('/login') }}">Login</a></li>
+    <li><a href="{{ url('/register') }}">Register</a></li>
+@else
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+           aria-expanded="false">
+            {{ Auth::user()->name }} <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+            <li><a href="{{ url('/user') }}"><i class="fa fa-btn fa-sign-out"></i>Account</a></li>
+        </ul>
+    </li>
+@endif
+</ul>
+</div>
+</div>
+</nav>
+@if(isset($user))
+<router-view :username="{{ $user = auth()->user()->name }}"></router-view>
+@endif
+@yield('content')
+<!-- JavaScripts -->
+<script src="/js/jquery/jquery-2.2.2.js"></script>
+<script src="/js/bootstrap/bootstrap.js"></script>
+<script src="/js/bundle.js"></script>
+<script>
+$.ajaxSetup({
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+}
+});
+</script>
+</div>
 </div>
 </body>
 </html>
