@@ -76,7 +76,6 @@ class ClientController extends Controller
             'business_area' => $request->input('business_area'),
             'user_id' => $request->input('user_id'),
         ]);
-        return view('project.create');
     }
 
 }
