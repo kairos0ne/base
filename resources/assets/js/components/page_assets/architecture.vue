@@ -1,10 +1,10 @@
 <template>
 <div class="container">
     <div id="what" class="page-header col-lg-12 col-md-12 col-sm-12 ">
-        <h1>Architecture<small>Defining core messaging and messaging hierarchy</small></h1>
+        <h1>Architecture<small> Defining core messaging and messaging hierarchy</small></h1>
         <p>Information architecture is the result of building conversion journeys based one the use cases defines.</p>
     </div>
-    <p class="col-lg-6 col-md-6 col-sm-12"> <img id="foundation" src="png/architecture_image.png" alt="">Many digital practioners will have you belive that an information architecture (IA) is generally a site map. It is not a site map. Had it been as such, we would have called it that. It is rather an assement of the of the information you have in relation to the users needs</p>
+    <p class="col-lg-6 col-md-6 col-sm-12"> <img id="foundation" src="png/architecture_image.png" alt="">Many digital practioners will have you belive that an information architecture is generally a site map. It is not a site map. Had it been as such, we would have called it that. It is rather an assement of the of the information you have in relation to the users needs</p>
     <p class="col-lg-6 col-md-6 col-sm-12"> As a result many make the mistake of, well let's start with the homepage and then discuss where we go from there. As per the first statement, this is not the correct way to go about developing an IA. An IA is rather an assesment of propositions you'd like to present and where they should be based on your defined personas</p>
     <div class="container">
     <p class="col-lg-6 col-md-6 col-sm-12"> A better place to start would be - What is my core proposition and is it relevant to all personas? For instance, let's say I run a online platform to help folks establish a strategy for building digital tools. My core proposition is: 'Helping you, do a better job at building a strategy'. This needs to be at the forfront of my communications and is relevant to all audiences. Therefor lets start with that and use it as a hero on the homepage. Lets break that down into a thought process so you can see whats going on here.</p>

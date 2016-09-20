@@ -47,7 +47,6 @@ import addproject from './../project/add-project.vue'
         methods: {
             getUser: function () {
                 this.$http.get('/api/get/user').then(function (userdetails) {
-                this.userid = userdetails.data.id;
                 this.username = userdetails.data.name;
                 });
             },

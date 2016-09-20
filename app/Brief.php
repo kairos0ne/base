@@ -12,7 +12,7 @@ class Brief extends Model
      * @var array
      */
     protected $fillable = [
-        'overview','objective','project_id'
+        'overview','objective','project_id','status'
     ];
 
     /**

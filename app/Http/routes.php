@@ -7,6 +7,7 @@ use App\User;
 use App\Project;
 use App\Brief;
 
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -43,24 +44,6 @@ Route::group(['middleware' => 'web'], function () {
         $user = Auth::user();
         return $user;
     });
-/**
- * Portfolio Rest API Routes
- */
-    Route::get('api/portfolios', function (){
-        // Get the portfolio data
-        $portfolios = Portfolio::latest()->get();
-        return $portfolios;
-    });
-    Route::get('api/portfolios/{id}', function (){
-        // Get single protfolio by id 
-        $portfolio = Portfolio::findOrFail($id);
-        return $portfolio;
-    });
-    Route::post('api/post/portfolios', [
-        // Persist the data with the PortfolioControllers store method - review 
-        'as' => 'api.portfolio.store', 'uses' => 'PortfolioController@store'
-    ]);
-
 
 /**  All Client related api routes **/ 
     Route::post('api/post/clients', [
@@ -73,11 +56,18 @@ Route::group(['middleware' => 'web'], function () {
         $clients = $user->clients;
         return $clients->toArray();
     });
-
-/**  All Project related api routes **/ 
+    // Get the parent client for the parsed brief using the client_id attribute 
+    Route::get('api/get/clients/{id}', function($id){
+        // Get the users project where the 
+        $client = Client::findOrFail(1)->where('id', $id)->first();
+        return $client;
+    });
+/**  All Project related api routes **/
+    // Post to a new Project to the DB
     Route::post('api/post/projects', [
         'as' => 'api.projects.store', 'uses' => 'ProjectController@store'
     ]);
+    // Get all projects for the signed in user
     Route::get('api/get/projects', function (){
         // Get the current signed in user
         $user = Auth::user();
@@ -91,6 +81,12 @@ Route::group(['middleware' => 'web'], function () {
             }
         }
         return $projects;
+    });
+    // Get the parent project for the parsed brief using the project_id attribute 
+    Route::get('api/get/projects/{id}', function($id){
+        // Get the users project where the 
+        $project = Project::findOrFail(1)->where('id', $id)->first();
+        return $project;
     });
 
 /**  All Brief related api routes **/ 
@@ -149,7 +145,7 @@ Route::group(['middleware' => 'web'], function () {
 |--------------------------------------------------------------------------
 | API routes request access - to be removed
 |--------------------------------------------------------------------------
-| For requesting access to the site prior to launchin it. 
+| For requesting access to the site prior to launching it. 
 |
 */
     Route::post('api/post/access', [

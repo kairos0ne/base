@@ -1,4 +1,4 @@
- <template>
+<template>
 <div id="wrapper">
     <!-- Start Main Container -->
     <div id="main_content_container" class="container-fluid">
@@ -7,7 +7,7 @@
                 <!-- List Clients  -->
                 <div class="list-group ">
                     <li  class="list-group-item h4">Clients</li>
-                    <li class="client_panel" v-for="client in clientList | orderBy 'name'">{{ client.name }}</li>
+                    <li @click.prevent="setSelectedClient(client)" class="client_panel" v-for="client in clientList | orderBy 'name'">{{ client.name }}</li>
                 </div>
                 <!-- End favourites function -->
 
@@ -41,24 +41,12 @@
 
                 </ul>
             </div>
-            <!-- End function for project panels -->
-            <div id="content_pane_container" class="col-md-7 col-lg-7 col-sm-12">
-                <ul class="list-group">
-                    <li id="project_title" class="list-group-item h4 ">Brief
-                        <a class="btn btn-default btn-xs pull-right" href="#">
-                            <i class="fa fa-pencil pull-right"></i>Edit
-                        </a>
-                        <a class="btn btn-default btn-xs pull-right" href="#">
-                            <i class="fa fa-tick pull-right"></i>Complete
-                        </a>
-                    </li>
-                    <div id="page_content_brief">
-                        <h3>{{ currentBrief.overview }}</h3>
-                        <h4>{{ currentBrief.objective }}</h3>
-                            <p>Notes:{{currentBrief.notes}}</p>
-                    </div>
-                </ul>
-            </div>
+            <!-- Start Brief Rest Components -->
+            <showbrief v-show='showBrief'></showbrief>
+            <!-- Start Rest Project Components -->
+            <showproject v-show='showProject'></showproject>
+            <!-- Start Client Rest Components -->
+            <showclient v-show='showClient'></showclient>
         </colgroup>
     </div>
 </div>
@@ -93,29 +81,10 @@
                 clientList: [],
                 projectList: [],
                 briefList: [],
-                showClient: true,
+                showClient: false,
                 showProject: false,
                 showBrief: false,
 
-                currentBrief: {
-                    id: null,
-                    overview: '',
-                    objective: '',
-                    project_id: null
-
-                },
-                currentProject: {
-                    id: null,
-                    name: '',
-                    description: '',
-                    client_id: null
-                },
-                currentClient: {
-                    id: null,
-                    name: '',
-                    business_area: '',
-                    user_id: null
-                }
             };
         },
         components: {
@@ -139,6 +108,7 @@
         ready() {
             this.getDashboardData();
         },
+        
         methods: {
             getDashboardData: function () {
                 this.$http.get('/api/get/clients').then(function(clients){
@@ -152,13 +122,22 @@
                 })
             },
             setSelectedClient: function(client) {
-                this.currentClient = client;
+                this.showBrief = false;
+                this.showProject = false;
+                this.showClient = true;
+                this.$broadcast('select-client', client)
             },
             setSelectedProject: function(project) {
-                this.currentProject = project;
+                this.showBrief = false;
+                this.showProject = true;
+                this.showClient = false;
+                this.$broadcast('select-project', project)
             },
             setSelectedBrief: function(brief) {
-                this.currentBrief = brief;
+                this.showBrief = true;
+                this.showProject = false;
+                this.showClient = false;
+                this.$broadcast('select-brief', brief)
             },
         }
 

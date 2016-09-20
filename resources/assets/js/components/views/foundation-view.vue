@@ -10,7 +10,7 @@
     import foundation from './../page_assets/foundation.vue'
     import persona from './../page_assets/personas.vue'
     import architecture from './../page_assets/architecture.vue'
-    import research from './../page_assets/architecture.vue'
+    import research from './../page_assets/research.vue'
     export default{
         data(){
             return{
@@ -25,3 +25,4 @@
         }
     }
 </script>
+    

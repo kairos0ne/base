@@ -54,7 +54,9 @@ p {
 }
 
 .panel {
-    border-radius: 0px; }
+    border-radius: 0px;
+    margin-top: 20px;
+}
 
 
 .h1, .h2, .h3, h1, h2, h3 {
@@ -225,11 +227,8 @@ a, a :active, a:hover{
 #inputID {
     margin-bottom: 10px;
 }
-label {
-    font-family: Lato;
-    font-weight: 300;
-    font-size: 23px;
-}
+
+
 .custom_text_area {
     border:none;
     font-family: Lato;
@@ -325,7 +324,7 @@ html,body {
     margin:0px 0px 0px 0px;
 }
 /* Main content panel styling*/
-#main_content_container{
+#main_content_container {
     margin:0px 0px 0px 0px;
     padding: 0px 0px 0px 0px;
     background-color: #e4e7e3;
@@ -353,7 +352,7 @@ html,body {
 /*Start navbar styling */
 .navbar{
     border-radius: 0px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 
 li.list-group-item {
@@ -389,11 +388,11 @@ li.list-group-item:last-child {
 
 /** Project Panel Styles - the 'project' modules on the dashboard  */
 li.project_panel{
-    border-top: 5px solid #97d700;
+    border-top: 5px solid #4f504c;
     position: relative;
     display: block;
     padding: 10px 15px;
-    margin-bottom: 10px;
+    margin: 5px 0px 10px 0px;
     background-color: #fff;
 }
 p#project_panel_client,#project_panel_BusUnit  {
@@ -420,7 +419,7 @@ div#progress_bar_ID.progress {
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1)
 }
 /** Job List within project panel styles - the 'project' modules on the dashboard  */
-li.job_list{
+li.job_list {
     position: relative;
     display: block;
     padding: 10px 15px;
@@ -428,7 +427,7 @@ li.job_list{
     background-color: #fff;
 }
 // Rules for sizing the icon.
-   .material-icons.md-18 { font-size: 18px; }
+.material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
@@ -438,7 +437,7 @@ li.job_list{
 .material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
 
 // Rules for using icons as white on a dark background.
-   .material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
 .material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
 
@@ -447,10 +446,17 @@ li#briefItem {
     padding-bottom: 0px;
 }
 #page_content_brief {
-    border-top: 5px solid #97d700;
+    border-top: 5px solid #4f504c;
     position: relative;
     display: block;
     padding: 10px 15px;
-    margin-bottom: 10px;
+    margin: 5px 0px 10px 0px;
     background-color: #fff;
+}
+
+#btn-complete {
+    margin: 0px 5px 5px 0px;
+}
+#btn-edit {
+    margin-bottom: 5px;
 }

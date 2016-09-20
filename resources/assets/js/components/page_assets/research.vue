@@ -1,7 +1,7 @@
 <template>
 <div class="container">
     <div id="what" class="page-header col-lg-12 col-md-12 col-sm-12 ">
-        <h1>Research <small>Metrics and their role.</small></h1>
+        <h1>Research<small> Metrics and their role.</small></h1>
         <p>Curiosity creates ideas and research validates them. Enabling the correct methodologies of research mitigates risk and often steers projects in a safer direction. The process entails data analysis across all capture and use points at the outset. The data is then collated and analysed to create a base set of<a href="/persona"> ideal personas.</a></p>
     </div>
     <p class="col-lg-6 col-md-6 col-sm-12"> <img id="foundation" src="png/research_image.png" alt="">Research is the backbone in the creative process It allows for a focused approach on a given set of objectives/ outcomes. The approach entails building associated data sets that provide context for an argument or comparison. The comparison of the sample data then serves as a starting point for a

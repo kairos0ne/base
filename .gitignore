@@ -11,3 +11,13 @@ public/js/bundle.js.map
 composer.lock
 
 *.map
+.idea/base.iml
+.idea/blade.xml
+.idea/copyright/profiles_settings.xml
+.idea/jsLibraryMappings.xml
+.idea/libraries/base_node_modules.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/php.xml
+.idea/vcs.xml
+.idea/workspace.xml
