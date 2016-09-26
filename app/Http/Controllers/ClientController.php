@@ -77,5 +77,20 @@ class ClientController extends Controller
             'user_id' => $request->input('user_id'),
         ]);
     }
-
+    /**
+     * Update the specified Client.
+     *
+     * @param  Request  $request
+     * @param  string  $id
+     * @return Response
+     */
+    public function update(Request $request, $id)
+    {
+        // validate the data 
+        $this->validate($request, ['name' => 'required', 'business_area' => 'required', 'user_id' => 'required']);
+        $client = Client::where('id', $id)
+                        ->update([  'name' => $request->input('name'), 
+                                    'business_area' => $request->input('business_area'),
+                                    'user_id'=> $request->input('user_id')]);
+    }
 }

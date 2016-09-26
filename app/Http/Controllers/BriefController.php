@@ -56,4 +56,22 @@ class BriefController extends Controller
             'project_id' => $request->input('project_id')
         ]);
     }
+
+    /**
+     * Update the specified Brief.
+     *
+     * @param  Request  $request
+     * @param  string  $id
+     * @return Response
+     */
+    public function update(Request $request, $id)
+    {
+        // validate required data 
+        $this->validate($request, ['overview' => 'required', 'objective' => 'required', 'project_id' => 'required']);
+        // Do the update 
+        $brief = Brief::where('id', $id)
+                        ->update(['overview' => $request->input('overview'), 
+                                    'objective' => $request->input('objective'),
+                                    'project_id' => $request->input('project_id')]);
+    }
 }
