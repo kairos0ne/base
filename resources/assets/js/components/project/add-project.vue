@@ -43,7 +43,7 @@ export default {
         };
     },
     created(){
-        // Get all briefs for now - this should be changed later TEMP
+        // Get the client ID 
         this.getClientId();
         // Get the project count
         this.getProjectCount();
