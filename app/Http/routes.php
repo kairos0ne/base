@@ -49,6 +49,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('api/post/clients', [
         'as' => 'api.clients.store', 'uses' => 'ClientController@store'
     ]);
+    // Update a single Client 
+    Route::put('api/put/client/{id}', [
+        'as' => 'api.client.update', 'uses' => 'ClientController@update'
+    ]); 
+    // Get all clients associated to the logged in user
     Route::get('api/get/clients', function (){
         // Get the current signed in user
         $user = Auth::user();
@@ -66,6 +71,10 @@ Route::group(['middleware' => 'web'], function () {
     // Post to a new Project to the DB
     Route::post('api/post/projects', [
         'as' => 'api.projects.store', 'uses' => 'ProjectController@store'
+    ]);
+    // Update a single Project 
+    Route::put('api/put/project/{id}', [
+        'as' => 'api.project.update', 'uses' => 'ProjectController@update'
     ]);
     // Get all projects for the signed in user
     Route::get('api/get/projects', function (){
@@ -92,6 +101,10 @@ Route::group(['middleware' => 'web'], function () {
 /**  All Brief related api routes **/ 
     Route::post('api/post/briefs', [
         'as' => 'api.briefs.store', 'uses' => 'BriefController@store'
+    ]);
+    // Update a single brief 
+    Route::put('api/put/brief/{id}', [
+        'as' => 'api.brief.update', 'uses' => 'BriefController@update'
     ]);
     Route::get('api/get/briefs', function(){
         // Get the current signed in user
