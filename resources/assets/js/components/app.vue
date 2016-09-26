@@ -47,6 +47,19 @@
             <showproject v-show='showProject'></showproject>
             <!-- Start Client Rest Components -->
             <showclient v-show='showClient'></showclient>
+            <!-- Start edit project -->
+            <editproject v-show='editProject'></editproject>
+            <!-- Start edit Client --> 
+            <editclient v-show='editclient'></editclient>
+            <!-- Start edit Brief  -->
+            <editbrief v-show='editBrief'></editbrief>
+            <!-- Start list project -->
+            <listproject v-show='listProject'></listproject>
+            <!-- Start list Client -->
+            <listclient v-show='listClient'></listclient>
+            <!-- List briefs  -->
+            <listbrief v-show='listBrief'></listbrief>
+
         </colgroup>
     </div>
 </div>
@@ -84,6 +97,12 @@
                 showClient: false,
                 showProject: false,
                 showBrief: false,
+                editProject:false,
+                editBrief:false,
+                editClient:false,
+                listProject:false,
+                listClient:false,
+                listBrief:false,
 
             };
         },
@@ -108,7 +127,85 @@
         ready() {
             this.getDashboardData();
         },
-        
+        events: {
+            'setEditProjectFalse': function () {
+              // Set the edit project value to false
+                this.editProject = false;    
+            },
+            'setEditBriefFalse': function () {
+              // Set the edit project value to false
+                this.editBrief = false;    
+            },
+            'setEditClientFalse': function () {
+              // Set the edit project value to false
+                this.editClient = false;    
+            },
+            'setShowProjectFalse': function () {
+              // Set the edit project value to false
+                this.showProject = false;    
+            },
+            'setShowBriefFalse': function () {
+              // Set the edit project value to false
+                this.showBrief = false;    
+            },
+            'setShowClientFalse': function () {
+              // Set the edit project value to false
+                this.showClient = false;    
+            },
+            'setListProjectFalse': function () {
+              // Set the edit project value to false
+                this.listProject = false;    
+            },
+            'setListBriefFalse': function () {
+              // Set the edit project value to false
+                this.listBrief = false;    
+            },
+            'setListClientFalse': function () {
+              // Set the edit project value to false
+                this.listClient = false;    
+            },
+            // Start true funtions 
+            'setEditProjectTrue': function () {
+              // Set the edit project value to false
+                this.editProject = true;    
+            },
+            'setEditBriefTrue': function () {
+              // Set the edit project value to false
+                this.editBrief = true;    
+            },
+            'setEditClientTrue': function () {
+              // Set the edit project value to false
+                this.editClient = true;    
+            },
+            'setShowProjectTrue': function () {
+              // Set the edit project value to false
+                this.showProject = true;    
+            },
+            'setShowBriefTrue': function () {
+              // Set the edit project value to false
+                this.showBrief = true;    
+            },
+            'setShowClientTrue': function () {
+              // Set the edit project value to false
+                this.showClient = true;    
+            },
+            'setListProjectTrue': function () {
+              // Set the edit project value to false
+                this.listProject = true;    
+            },
+            'setListBriefTrue': function () {
+              // Set the edit project value to false
+                this.listBrief = true;    
+            },
+            'setListClientTrue': function () {
+              // Set the edit project value to false
+                this.listClient = true;    
+            },
+            'set-edit-project': function (project){
+                this.setSelectedProject(project);
+            },
+
+        },
         methods: {
             getDashboardData: function () {
                 this.$http.get('/api/get/clients').then(function(clients){
@@ -125,19 +222,20 @@
                 this.showBrief = false;
                 this.showProject = false;
                 this.showClient = true;
-                this.$broadcast('select-client', client)
+                this.$broadcast('select-client', client);
             },
             setSelectedProject: function(project) {
                 this.showBrief = false;
                 this.showProject = true;
                 this.showClient = false;
-                this.$broadcast('select-project', project)
+                this.$broadcast('select-project', project);
+                this.$broadcast('edit-project', project);
             },
             setSelectedBrief: function(brief) {
                 this.showBrief = true;
                 this.showProject = false;
                 this.showClient = false;
-                this.$broadcast('select-brief', brief)
+                this.$broadcast('select-brief', brief);
             },
         }
 
