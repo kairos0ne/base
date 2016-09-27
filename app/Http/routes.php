@@ -54,16 +54,12 @@ Route::group(['middleware' => 'web'], function () {
         'as' => 'api.client.update', 'uses' => 'ClientController@update'
     ]); 
     // Get all clients associated to the logged in user
-    Route::get('api/get/clients', function (){
-        // Get the current signed in user
-        $user = Auth::user();
-        // Get the users clients
-        $clients = $user->clients;
-        return $clients->toArray();
-    });
+    Route::get('api/get/clients', [
+        'as' => 'api.get.clients', 'uses' => 'ClientController@index'
+    ]);
     // Get the parent client for the parsed brief using the client_id attribute 
     Route::get('api/get/clients/{id}', function($id){
-        // Get the users project where the 
+        // Get the users client where the ID is equal to the parsed ID
         $client = Client::findOrFail(1)->where('id', $id)->first();
         return $client;
     });
@@ -77,20 +73,9 @@ Route::group(['middleware' => 'web'], function () {
         'as' => 'api.project.update', 'uses' => 'ProjectController@update'
     ]);
     // Get all projects for the signed in user
-    Route::get('api/get/projects', function (){
-        // Get the current signed in user
-        $user = Auth::user();
-        // Get the users clients
-        $clients = $user->clients;
-        $projects = array();
-        foreach ($clients as $client) {
-            $items = $client->projects;
-            foreach ($items as $item) {
-                array_push($projects, $item);
-            }
-        }
-        return $projects;
-    });
+    Route::get('api/get/projects', [
+        'as' => 'api.get.projects', 'uses' => 'ProjectController@index'
+    ]);
     // Get the parent project for the parsed brief using the project_id attribute 
     Route::get('api/get/projects/{id}', function($id){
         // Get the users project where the 
@@ -106,32 +91,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::put('api/put/brief/{id}', [
         'as' => 'api.brief.update', 'uses' => 'BriefController@update'
     ]);
-    Route::get('api/get/briefs', function(){
-        // Get the current signed in user
-        $user = Auth::user();
-        // Get the users clients
-        $clients = $user->clients;
-        // Lopp through clients and get the projects for each client and if the value is not null, return the projects
-        $projects = array();
-        $briefs = array();
-        foreach ($clients as $client) {
-            if (null !== $client->projects) {
-                $items = $client->projects;
-            }
-            foreach ($items as $item) {
-                array_push($projects, $item);   
-            }
-        }
-        foreach ($projects as $project) {
-            if (null !== $project->briefs) {
-                $briefitems = $project->briefs;
-            }
-            foreach ($briefitems as $briefitem){
-                array_push($briefs, $briefitem);
-            }
-        }       
-        return $briefs;     
-    });
+    Route::get('api/get/briefs', [
+        'as' => 'api.get.briefs', 'uses' => 'BriefController@index'
+    ]);
 /*
 |--------------------------------------------------------------------------
 | API routes count items
@@ -154,15 +116,4 @@ Route::group(['middleware' => 'web'], function () {
         $briefcount = count($briefs);
         return $briefcount;
     });
-    /*
-|--------------------------------------------------------------------------
-| API routes request access - to be removed
-|--------------------------------------------------------------------------
-| For requesting access to the site prior to launching it. 
-|
-*/
-    Route::post('api/post/access', [
-        // Persist the data with the PortfolioControllers store method - review 
-        'as' => 'api.access.store', 'uses' => 'AccessController@store'
-    ]);
 });
