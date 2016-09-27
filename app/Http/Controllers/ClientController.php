@@ -31,16 +31,9 @@ class ClientController extends Controller
     {
         // Get the current signed in user
         $user = Auth::user();
-        // Get all clients to check ID
-        $allclients = Client::latest()->get();
         // Get the users clients
-        $clients = Client::latest()->where('user_id', $user->id )->get();
-        // Count the clients and and assign that to a variable
-        $clientcount = count($clients);
-        // Count all clients
-        $allclientcount = count($allclients);
-        //Count all clients to assign the new send the items id to vm
-        return view('client.index', compact('clients', 'user', 'clientcount', 'allclientcount'));
+        $clients = $user->clients;
+        return $clients->toArray();
     }
 
     /**

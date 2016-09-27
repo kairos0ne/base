@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Brief;
 use Illuminate\Http\Request;
+use Auth;
 
 
 class BriefController extends Controller
@@ -26,8 +27,30 @@ class BriefController extends Controller
      */
     public function index()
     {
-        $briefs = Brief::latest()->get();
-        return $briefs;
+        // Get the current signed in user
+        $user = Auth::user();
+        // Get the users clients
+        $clients = $user->clients;
+        // Lopp through clients and get the projects for each client and if the value is not null, return the projects
+        $projects = array();
+        $briefs = array();
+        foreach ($clients as $client) {
+            if (null !== $client->projects) {
+                $items = $client->projects;
+            }
+            foreach ($items as $item) {
+                array_push($projects, $item);   
+            }
+        }
+        foreach ($projects as $project) {
+            if (null !== $project->briefs) {
+                $briefitems = $project->briefs;
+            }
+            foreach ($briefitems as $briefitem){
+                array_push($briefs, $briefitem);
+            }
+        }       
+        return $briefs;     
     }
 
     /**

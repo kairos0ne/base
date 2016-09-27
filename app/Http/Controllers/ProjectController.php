@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Project;
+use Auth;
 
 class ProjectController extends Controller
 {
@@ -27,8 +28,18 @@ class ProjectController extends Controller
      */
     public function index ()
     {
-    	$projects = Project::latest()->get();
-        return view('dashboard', compact('projects'));
+    	 // Get the current signed in user
+        $user = Auth::user();
+        // Get the users clients
+        $clients = $user->clients;
+        $projects = array();
+        foreach ($clients as $client) {
+            $items = $client->projects;
+            foreach ($items as $item) {
+                array_push($projects, $item);
+            }
+        }
+        return $projects;
     }
 
     /**
