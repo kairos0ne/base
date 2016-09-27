@@ -34,6 +34,7 @@ li.client_panel {
 
 p {
     line-height: 2em;
+    font-weight: 300;
 }
 
 .navbar-default {
@@ -404,10 +405,21 @@ p#project_panel_jobNum  {
     text-align: right;
 }
 li#project_title.list-group-item:first-child {
+    display: block;
     border-radius:0px;
     border-top: none;
     background-color: #e4e7e3;
 }
+li#project_title_edit.list-group-item {
+    display: block;
+    border-radius:0px;
+    border-top: none;
+    background-color: #e4e7e3;
+    padding: 0px 0px 0px 0px;
+    margin:0px 0px 0px 0px;
+}
+
+
 
 div#progress_bar_ID.progress { 
     height: 20px;
@@ -459,4 +471,80 @@ li#briefItem {
 }
 #btn-edit {
     margin-bottom: 5px;
+}
+
+input.edit_input_style_title{
+    display: block;
+    padding: 0px 12px;
+    width: 75%;
+    height: 30px;
+    font-size: 18px;
+    background-image: none;
+    border: none;
+    background-color: #e4e7e3;
+    box-shadow: none;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+    margin-top: 9px;
+
+   
+}
+input.edit_input_style_title:focus {
+    display: block;
+    width: 75%;
+    height: 30px;
+    font-size: 18px;
+    line-height: 1.1;
+    padding: 6px 12px;
+    background-image: none;
+    border-style: dotted;
+    border-color: #d0d2cb;
+    font-family: inherit;
+    font-weight: 500;
+    color: inherit;
+    background-color: #e4e7e3;
+    box-shadow: none;
+    border-width: thin;
+    margin-top: 9px;
+}
+textarea.edit_input_style_body{
+    display: block;
+    padding: 0px 12px;
+    width: 100%;
+    font-size: 16px;
+    background-image: none;
+    border: none;
+    background-color: #fff;
+    box-shadow: none;
+    font-family: inherit;
+    font-weight: 300;
+    line-height: 2em;
+    color: inherit;
+    margin-top: 9px;
+    max-width: 100%;
+    min-width:100%;
+    min-height: 35px;
+   
+}
+textarea.edit_input_style_body:focus {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    line-height: 2em;
+    padding: 6px 12px;
+    background-image: none;
+    border-style: dotted;
+    border-color: #d0d2cb;
+    font-family: inherit;
+    font-weight: 300;
+    color: inherit;
+    background-color: #fff;
+    box-shadow: none;
+    border-width: thin;
+    margin-top: 9px;
+    max-width: 100%;
+    min-width:100%;
+    min-height: 35px;
 }
