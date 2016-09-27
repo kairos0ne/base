@@ -1,36 +1,25 @@
 <template>
-<div id="content_pane_container" class="col-md-7 col-lg-7 col-sm-12">
+    <div id="content_pane_container" class="col-md-7 col-lg-7 col-sm-12">
         <form action="" method="POST" role="form">
-            <div class="form-group">
-                <ul class="list-group">
-                    <li id="project_title" class="list-group-item h4 ">
-                        <input type="text" class="form-control edit_name_project" name="name" id="name" v-model="ProjectData.name"  autocomplete="off"/>
-                        <a id="btn-edit" class="btn btn-default btn-xs pull-right" @click.prevent="editSelectedProject(project)">
-                            <i class="fa fa-pencil pull-right"></i>Edit
-                        </a>
-                        <a id="btn-complete" class="btn btn-primary btn-xs pull-right" href="#">
-                            <i class="fa fa-tick pull-right"></i>Complete
-                        </a>
-                    </li>
-                    <div id="page_content_brief">
-                        <input type="text" class="form-control" name="description" id="decription" v-model="ProjectData.description" autocomplete="off"/>
-                    </div>
-                </ul>
-
-
-
-        
-               
-                       
+                <div class="form-group">
+                    <ul class="list-group">
+                        <li id="project_title_edit" class="">
+                            <a id="btn-save" class="btn btn-default btn-xs pull-right" v-on:click="onFormSubmit">
+                                <i class="fa fa-pencil pull-right"></i>Save
+                            </a>
+                            <a id="btn-complete" class="btn btn-primary btn-xs pull-right" href="#">
+                                <i class="fa fa-tick pull-right"></i>Complete
+                            </a>
+                            <input type="text" class="form-control edit_input_style_title " name="name" id="name" v-model="ProjectData.name"  autocomplete="off"/>
                             
-                             
-                        
-            </div>
-              
-                        <button type="button" class="btn btn-default" v-on:click="onFormSubmit">Save</button>
-                   
-              
-            </form>
+                        </li>
+                        <div id="page_content_brief">
+                            <textarea class="form-control edit_input_style_body" name="description" id="decription" v-model="ProjectData.description" autocomplete="off"></textarea>
+                        </div>
+                    </ul>       
+                </div>  
+                <button type="button" class="btn btn-default" v-on:click="onFormSubmit">Save</button>
+        </form>
     </div>
 </template>
 <script>

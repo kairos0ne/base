@@ -222,20 +222,41 @@
                 this.showBrief = false;
                 this.showProject = false;
                 this.showClient = true;
+                this.editProject = false;
+                this.editProject = false;
+                this.editClient = false;
+                this.editBrief = false;  
+                this.listProject = true;
+                this.listBrief = false;
+                this.listClient = false; 
                 this.$broadcast('select-client', client);
+                this.$broadcast('edit-client', client);
+                this.$broadcast('list-projects', client);
             },
             setSelectedProject: function(project) {
                 this.showBrief = false;
                 this.showProject = true;
                 this.showClient = false;
                 this.editProject = false;
+                this.editClient = false; 
+                this.editBrief = false; 
+                this.listBrief = true; 
+                this.listClient = false; 
+                this.listProject = false;
                 this.$broadcast('select-project', project);
                 this.$broadcast('edit-project', project);
+                this.$broadcast('list-briefs', project);
             },
             setSelectedBrief: function(brief) {
                 this.showBrief = true;
                 this.showProject = false;
                 this.showClient = false;
+                this.editProject = false;
+                this.editClient = false; 
+                this.editBrief = false; 
+                this.listClient = false; 
+                this.listProject = false; 
+                this.listBrief = false; 
                 this.$broadcast('select-brief', brief);
             },
         }
