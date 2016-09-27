@@ -228,6 +228,7 @@
                 this.showBrief = false;
                 this.showProject = true;
                 this.showClient = false;
+                this.editProject = false;
                 this.$broadcast('select-project', project);
                 this.$broadcast('edit-project', project);
             },

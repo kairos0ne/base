@@ -53,9 +53,7 @@ Vue.filter('clientID', function(value, client_id){
 });
 Vue.filter('briefsForProject', function(value, id){
     return value.filter(function(item){
-        if (item.project_id == id) {
-            return item;
-        }
+       return item.project_id == id;
     });
 });
 

@@ -46,10 +46,9 @@
                 });
             },
         },
-        methods:{
-            editSelectedProject: function(project){
+        methods: {
+            editSelectedProject: function(){
                 this.$dispatch('setShowProjectFalse');
-                this.$dispatch('set-edit-project', project);
                 this.$dispatch('setEditProjectTrue');
             },
         }

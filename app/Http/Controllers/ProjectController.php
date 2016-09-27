@@ -57,10 +57,7 @@ class ProjectController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, ['name' => 'required', 'description' => 'required', 'client_id' => 'required']);
-        $project = Project::where('id', $id)
-                            ->update([  'name' => $request->input('name'), 
-                                        'description' => $request->input('description'),
-                                        'client_id' => $request->input('client_id')]);
+        $project = Project::where('id', $id)->update([  'name' => $request->input('name'),'description' => $request->input('description'),'client_id' => $request->input('client_id')]);
     }
     /**
      * Get the total number of clients to assign 
