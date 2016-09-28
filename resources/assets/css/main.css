@@ -396,6 +396,22 @@ li.project_panel{
     margin: 5px 0px 10px 0px;
     background-color: #fff;
 }
+li.project_panel_edit{
+    border-bottom: 1px solid #4f504c;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin: 5px 0px 10px 0px;
+    background-color: #fff;
+}
+li.brief_list_edit{
+    border-bottom: 1px solid #777;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin: 0px 0px 0px 0px;
+    background-color: #fff;
+}
 p#project_panel_client,#project_panel_BusUnit  {
     font-size: 12px;
     margin:0 0 0px;
@@ -457,15 +473,25 @@ li#briefItem {
     display: block;
     padding-bottom: 0px;
 }
+ul#show_project_list.list-group{
+    margin-bottom: 0px;
+}
 #page_content_brief {
     border-top: 5px solid #4f504c;
     position: relative;
     display: block;
     padding: 10px 15px;
+    margin: 5px 0px 0px 0px;
+    background-color: #fff;
+}
+#page_content_brief_edit {
+    border-top: 5px solid #4f504c;
+    position: relative;
+    display: block;
+    padding: 0px 0px;
     margin: 5px 0px 10px 0px;
     background-color: #fff;
 }
-
 #btn-complete {
     margin: 0px 5px 5px 0px;
 }
@@ -475,7 +501,7 @@ li#briefItem {
 
 input.edit_input_style_title{
     display: block;
-    padding: 0px 12px;
+    padding: 0px 16px;
     width: 75%;
     height: 30px;
     font-size: 18px;
@@ -486,7 +512,7 @@ input.edit_input_style_title{
     font-family: inherit;
     font-weight: 500;
     line-height: 1.1;
-    color: inherit;
+    color: #333;
     margin-top: 9px;
 
    
@@ -497,13 +523,13 @@ input.edit_input_style_title:focus {
     height: 30px;
     font-size: 18px;
     line-height: 1.1;
-    padding: 6px 12px;
+    padding: 0px 16px;
     background-image: none;
     border-style: dotted;
     border-color: #d0d2cb;
     font-family: inherit;
     font-weight: 500;
-    color: inherit;
+    color: #333;
     background-color: #e4e7e3;
     box-shadow: none;
     border-width: thin;
@@ -511,7 +537,7 @@ input.edit_input_style_title:focus {
 }
 textarea.edit_input_style_body{
     display: block;
-    padding: 0px 12px;
+    padding: 6px 12px;
     width: 100%;
     font-size: 16px;
     background-image: none;
@@ -521,7 +547,7 @@ textarea.edit_input_style_body{
     font-family: inherit;
     font-weight: 300;
     line-height: 2em;
-    color: inherit;
+    color: #333;
     margin-top: 9px;
     max-width: 100%;
     min-width:100%;
@@ -535,11 +561,11 @@ textarea.edit_input_style_body:focus {
     line-height: 2em;
     padding: 6px 12px;
     background-image: none;
-    border-style: dotted;
+    border-bottom: dotted;
     border-color: #d0d2cb;
     font-family: inherit;
     font-weight: 300;
-    color: inherit;
+    color: #333;
     background-color: #fff;
     box-shadow: none;
     border-width: thin;
@@ -548,3 +574,19 @@ textarea.edit_input_style_body:focus {
     min-width:100%;
     min-height: 35px;
 }
+
+a.badge_lable {
+
+
+}
+.brief_list{
+    display: block;
+    font-weight: 300;
+    font-size: 16px;
+    border-bottom: solid #777;
+    padding: 5px 10px 5px 10px;
+    line-height: 1.5em;
+    border-width: thin;
+    background-color: #fff;
+}
+p.

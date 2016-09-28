@@ -6,6 +6,8 @@ use App\Http\Requests;
 use App\Brief;
 use Illuminate\Http\Request;
 use Auth;
+use App\Project;
+use App\Client;
 
 
 class BriefController extends Controller
@@ -96,5 +98,19 @@ class BriefController extends Controller
                         ->update(['overview' => $request->input('overview'), 
                                     'objective' => $request->input('objective'),
                                     'project_id' => $request->input('project_id')]);
+    }
+
+     /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getBriefsForProject($id)
+    {
+        
+        $project = Project::findOrFail(1)->where('id', $id)->first();
+        $briefs = $project->briefs;
+        return $briefs;
+
     }
 }

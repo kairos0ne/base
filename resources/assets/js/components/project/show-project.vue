@@ -1,6 +1,6 @@
 <template>
     <div id="content_pane_container" class="col-md-7 col-lg-7 col-sm-12">
-        <ul class="list-group">
+        <ul id="show_project_list" class="list-group ">
             <li id="project_title" class="list-group-item h4 ">{{ project.name }}
                 <a id="btn-edit" class="btn btn-default btn-xs pull-right" @click.prevent="editSelectedProject(project)">
                     <i class="fa fa-pencil pull-right"></i>Edit
@@ -13,15 +13,13 @@
                 <p>{{ project.description }}</p>
             </div>
         </ul>
-        <h4>Briefs</h4>
-        <ul class="list-group">
-            <li id="brief_list" v-for="brief in briefList | briefsForProject this.project.id">
-            <p>{{ brief.overview }}</p> 
-            </li>
-        </ul>
+        <listbrief></listbrief> 
     </div>
 </template>
 <script>
+    
+    import listbrief from '../brief/list-brief.vue'
+
     export default{
         data(){
             return{
@@ -31,6 +29,9 @@
                 clientID:null,
                 projectID:null,
             }
+        },
+        components: {
+            listbrief: listbrief,
         },
         events: {
             'select-project': function (project) {

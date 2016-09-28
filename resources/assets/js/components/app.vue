@@ -21,7 +21,7 @@
                     </li>
 
                     <li v-for="project in projectList" class="project_panel"><a href="#">
-                        <div id="project_panel_title" @click.prevent="setSelectedProject(project)">{{ project.name }}<a href="{project_URL}"><span class="fa fa-pencil-square fa-lg fa-pull-right"></a></span></div></a>
+                        <div id="project_panel_title" @click.prevent="setSelectedProject(project)">{{ project.name }}<a><span class="fa fa-pencil-square fa-lg fa-pull-right"></a></span></div></a>
                         <p id="project_panel_client">Description: {{ project.description }}  </p>
                         <p id="project_panel_BusUnit" v-for="client in clientList | clientID project.client_id">Client: {{ client.name }} | Business Area: {{ client.business_area}} </p>
                         <div id="progress_bar_ID"class="progress">
@@ -53,12 +53,7 @@
             <editclient v-show='editclient'></editclient>
             <!-- Start edit Brief  -->
             <editbrief v-show='editBrief'></editbrief>
-            <!-- Start list project -->
-            <listproject v-show='listProject'></listproject>
-            <!-- Start list Client -->
-            <listclient v-show='listClient'></listclient>
-            <!-- List briefs  -->
-            <listbrief v-show='listBrief'></listbrief>
+
 
         </colgroup>
     </div>
@@ -91,6 +86,9 @@
             return {
                 formData: [],
                 user: null,
+                userRole:null,
+                userGroup:null,
+                team:null,
                 clientList: [],
                 projectList: [],
                 briefList: [],

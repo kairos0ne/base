@@ -13,16 +13,19 @@
                             <input type="text" class="form-control edit_input_style_title " name="name" id="name" v-model="ProjectData.name"  autocomplete="off"/>
                             
                         </li>
-                        <div id="page_content_brief">
+                        <div id="page_content_brief_edit">
                             <textarea class="form-control edit_input_style_body" name="description" id="decription" v-model="ProjectData.description" autocomplete="off"></textarea>
+                            <listbrief></listbrief> 
                         </div>
-                    </ul>       
-                </div>  
+                    </ul> 
+                         
+                </div> 
                 <button type="button" class="btn btn-default" v-on:click="onFormSubmit">Save</button>
         </form>
     </div>
 </template>
 <script>
+    import listbrief from '../brief/list-brief.vue'
 export default {
 
     data(){
@@ -33,8 +36,13 @@ export default {
             },
             clientID:null,
             briefList:[],
+            status:null,
         };
     },
+     components: {
+            listbrief: listbrief,
+
+        },
     created(){
     	
     },
@@ -49,7 +57,6 @@ export default {
                 });
             },
         },
-
     methods: {
         onFormSubmit: function (e) {
             //Prevent default action

@@ -57,6 +57,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('api/get/clients', [
         'as' => 'api.get.clients', 'uses' => 'ClientController@index'
     ]);
+    Route::get('api/get/client/{id}', function($id){
+        // Get the users project where the 
+        $client = Client::findOrFail(1)->where('id', $id)->first();
+        return $client;
+    });
+
     // Get the parent client for the parsed brief using the client_id attribute 
     Route::get('api/get/clients/{id}', function($id){
         // Get the users client where the ID is equal to the parsed ID
@@ -93,6 +99,19 @@ Route::group(['middleware' => 'web'], function () {
     ]);
     Route::get('api/get/briefs', [
         'as' => 'api.get.briefs', 'uses' => 'BriefController@index'
+    ]);
+    Route::get('api/get/brief/{id}', function($id){
+        // Get the users project where the 
+        $brief = Brief::findOrFail(1)->where('id', $id)->first();
+        return $brief;
+    });
+    Route::get('api/get/projects/{id}', function($id){
+        // Get the users project where the 
+        $project = Project::findOrFail(1)->where('id', $id)->first();
+        return $project;
+    });
+    Route::get('api/get/briefs/{id}', [
+        'as' => 'projects/briefs', 'uses' => 'BriefController@getBriefsForProject'
     ]);
 /*
 |--------------------------------------------------------------------------
