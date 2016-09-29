@@ -41,7 +41,6 @@ export default {
     },
      components: {
             listbrief: listbrief,
-
         },
     created(){
     	

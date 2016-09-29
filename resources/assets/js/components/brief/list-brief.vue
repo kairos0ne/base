@@ -1,6 +1,6 @@
 <template>  
     <div>
-        <ul id="show_project_list" class="list-group">
+        <ul id="list_of_briefs" class="list-group">
             <li class="brief_list_edit">
                 <a class="badge_lable">Briefs&nbsp;<span class="badge">Total -&nbsp;{{briefList.length}}</span></a><br>
             </li>
