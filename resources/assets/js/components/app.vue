@@ -30,13 +30,7 @@
                             </div>
                         </div>
                         <hr>
-                        <div id="brief_panel_title" class="h5">Briefs <i class="fa fa-caret-square-o-up fa-lg fa-pull-right" aria-hidden="true" data-toggle="collapse" data-target="#briefs"></i></div>
-                        <ul id="briefs" class="list-group">
-                            <li id="briefItem" v-for="brief in briefList | projectID project.id"
-                                @click.prevent="setSelectedBrief(brief)">
-                                {{ brief.overview }}
-                            </li >
-                        </ul>
+                        <listbrief></listbrief>
                     </li>
 
                 </ul>
@@ -44,15 +38,16 @@
             <!-- Start Brief Rest Components -->
             <showbrief v-show='showBrief'></showbrief>
             <!-- Start Rest Project Components -->
-            <showproject v-show='showProject'></showproject>
+            <showproject v-show='showProject' transition='fade'></showproject>
             <!-- Start Client Rest Components -->
-            <showclient v-show='showClient'></showclient>
+            <showclient v-show='showClient' transition='fade'></showclient>
             <!-- Start edit project -->
-            <editproject v-show='editProject'></editproject>
+            <editproject v-show='editProject' transition='fade'></editproject>
             <!-- Start edit Client --> 
-            <editclient v-show='editclient'></editclient>
+            <editclient v-show='editclient' transition='fade'></editclient>
             <!-- Start edit Brief  -->
-            <editbrief v-show='editBrief'></editbrief>
+            <editbrief v-show='editBrief' transition='fade'></editbrief>
+
 
 
         </colgroup>

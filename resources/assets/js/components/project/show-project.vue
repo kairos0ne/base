@@ -8,6 +8,7 @@
                 <a id="btn-complete" class="btn btn-primary btn-xs pull-right" href="#">
                     <i class="fa fa-tick pull-right"></i>Complete
                 </a>
+                 <a class="badge_lable"><span class="badge">Briefs -&nbsp;{{briefList.length}}</span></a><br>
             </li>
             <div id="page_content_brief">
                 <p>{{ project.description }}</p>
