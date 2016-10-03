@@ -17,7 +17,6 @@
                             <textarea class="form-control edit_input_style_body" name="description" id="decription" v-model="ClientData.business_area" autocomplete="off"></textarea>
                         </div>
                     </ul> 
-                    <listproject></listproject>
                 </div> 
                 <button type="button" class="btn btn-default" v-on:click="onFormSubmit">Save</button>
         </form>

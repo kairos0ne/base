@@ -5,11 +5,8 @@
         <colgroup>
             <div id="sidebar_container" class="col-md-2 col-sm-12 col-lg-2">
                 <!-- List Clients  -->
-                <div class="list-group ">
-                    <li  class="list-group-item h4">Clients</li>
-                    <li @click.prevent="setSelectedClient(client)" class="client_panel" v-for="client in clientList | orderBy 'name'">{{ client.name }}</li>
-                </div>
-                <!-- End favourites function -->
+                <listclient></listclient>
+                <!-- List Favourites -->
 
             </div>
             <div id="content_bar_container" class="col-md-3 col-sm-12 col-lg-3">
@@ -30,7 +27,7 @@
                             </div>
                         </div>
                         <hr>
-                        <listbrief></listbrief>
+
                     </li>
 
                 </ul>
@@ -38,15 +35,15 @@
             <!-- Start Brief Rest Components -->
             <showbrief v-show='showBrief'></showbrief>
             <!-- Start Rest Project Components -->
-            <showproject v-show='showProject' transition='fade'></showproject>
+            <showproject v-show='showProject' ></showproject>
             <!-- Start Client Rest Components -->
-            <showclient v-show='showClient' transition='fade'></showclient>
+            <showclient v-show='showClient' ></showclient>
             <!-- Start edit project -->
-            <editproject v-show='editProject' transition='fade'></editproject>
+            <editproject v-show='editProject'></editproject>
             <!-- Start edit Client --> 
-            <editclient v-show='editclient' transition='fade'></editclient>
+            <editclient v-show='editclient'></editclient>
             <!-- Start edit Brief  -->
-            <editbrief v-show='editBrief' transition='fade'></editbrief>
+            <editbrief v-show='editBrief'></editbrief>
 
 
 
@@ -197,6 +194,15 @@
             'set-edit-project': function (project){
                 this.setSelectedProject(project);
             },
+            'update-client-rest': function (client){
+                this.setSelectedClient(client);
+            },
+            'update-brief-rest': function (brief){
+                this.setSelectedClient(client);
+            },
+            'update-project-rest': function (project){
+                this.setSelectedClient(client);
+            },
 
         },
         methods: {
@@ -209,9 +215,12 @@
                 });
                 this.$http.get('/api/get/briefs').then(function (briefs) {
                     this.briefList = briefs.data;
-                })
+                });
             },
             setSelectedClient: function(client) {
+                this.$broadcast('select-client', client);
+                this.$broadcast('edit-client', client);
+                this.$broadcast('list-projects', client);
                 this.showBrief = false;
                 this.showProject = false;
                 this.showClient = true;
@@ -222,11 +231,12 @@
                 this.listProject = true;
                 this.listBrief = false;
                 this.listClient = false; 
-                this.$broadcast('select-client', client);
-                this.$broadcast('edit-client', client);
-                this.$broadcast('list-projects', client);
+
             },
             setSelectedProject: function(project) {
+                this.$broadcast('select-project', project);
+                this.$broadcast('edit-project', project);
+                this.$broadcast('list-briefs', project);
                 this.showBrief = false;
                 this.showProject = true;
                 this.showClient = false;
@@ -236,11 +246,10 @@
                 this.listBrief = true; 
                 this.listClient = false; 
                 this.listProject = false;
-                this.$broadcast('select-project', project);
-                this.$broadcast('edit-project', project);
-                this.$broadcast('list-briefs', project);
             },
             setSelectedBrief: function(brief) {
+                this.$broadcast('select-brief', brief);
+                this.$broadcast('edit-brief', brief);
                 this.showBrief = true;
                 this.showProject = false;
                 this.showClient = false;
@@ -250,7 +259,6 @@
                 this.listClient = false; 
                 this.listProject = false; 
                 this.listBrief = false; 
-                this.$broadcast('select-brief', brief);
             },
         }
 
