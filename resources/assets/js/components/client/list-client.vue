@@ -31,7 +31,7 @@ export default {
                 this.$dispatch('update-client-rest', client); 
         },
         getClientData: function(){
-        	this.$http.get('/api/get/clients').then(function(clients){
+        	this.$http.get('api/get/clients').then(function(clients){
                     this.clientList = clients.data;
                 });	
         },    
