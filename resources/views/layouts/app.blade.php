@@ -10,7 +10,7 @@
         <!-- Fonts -->
         <link href="/css/fontawesome/font-awesome.css" rel='stylesheet' type='text/css'>
         <!-- Icons -->
-        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
+       <!--  <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>  -->
         <!-- Styles -->
         <link href="/css/bootstrap/bootstrap.css" rel="stylesheet">
         <!-- Custom Styles -->
@@ -24,7 +24,7 @@
 
             .fa-btn {
                 margin-right: 6px;
-            }
+            } 
         </style>
     </head>
     <body>

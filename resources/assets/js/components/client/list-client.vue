@@ -12,10 +12,7 @@ export default {
             userID:null,
             clientID:null,
             clientList:[],
-            projectList:[],
-            briefList:[],
             editToggel:true,
-            status:'',
 
         };
     },
@@ -29,6 +26,9 @@ export default {
     methods: {
     	setSelectedClient: function(client) {
                 this.$dispatch('update-client-rest', client); 
+                this.$dispatch('setShowClientTrue');
+                this.$dispatch('setShowProjectFalse');
+                this.$dispatch('setShowBriefFalse');
         },
         getClientData: function(){
         	this.$http.get('api/get/clients').then(function(clients){

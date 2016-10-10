@@ -16,22 +16,23 @@ export default {
     data(){
         return {
             ProjectID:null,
-            project:{},
+            ProjectData:{},
             briefList:[],
             editToggel:true,
             status:'',
 
         };
     },
-    created(){
-    	
+    ready(){
+
     },
+
      events: {
             'list-briefs': function (project) {
               // `this` in event callbacks are automatically bound
               // to the instance that registered it
-                this.project = project; 
-                this.ProjectID = this.project.id;
+                this.ProjectData = project; 
+                this.ProjectID = this.ProjectData.id;
                 this.$http.get('api/get/briefs/' + this.ProjectID).then(function(briefs){
                     this.briefList = briefs.data;
                 });

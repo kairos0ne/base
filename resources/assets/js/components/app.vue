@@ -6,31 +6,11 @@
             <div id="sidebar_container" class="col-md-2 col-sm-12 col-lg-2">
                 <!-- List Clients  -->
                 <listclient></listclient>
-                <!-- List Favourites -->
-
+                <!-- List Favorites -->
             </div>
             <div id="content_bar_container" class="col-md-3 col-sm-12 col-lg-3">
-                <ul class="list-group">
-                    <li id="project_title" class="list-group-item h4 ">Projects
-                        <a href="{filter}"><span class="fa fa-list fa-pull-right"></a></span>
-                        <a href="{filter}"><span class="fa fa-th-large fa-pull-right"></a></span>
-                        <a href="{filter}"><span class="fa fa-filter fa-pull-right"></a></span>
-                    </li>
-
-                    <li v-for="project in projectList" class="project_panel"><a href="#">
-                        <div id="project_panel_title" @click.prevent="setSelectedProject(project)">{{ project.name }}<a><span class="fa fa-pencil-square fa-lg fa-pull-right"></a></span></div></a>
-                        <p id="project_panel_client">Description: {{ project.description }}  </p>
-                        <p id="project_panel_BusUnit" v-for="client in clientList | clientID project.client_id">Client: {{ client.name }} | Business Area: {{ client.business_area}} </p>
-                        <div id="progress_bar_ID"class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
-                                <span class="sr-only"></span>
-                            </div>
-                        </div>
-                        <hr>
-
-                    </li>
-
-                </ul>
+                <!-- Main Content Bar Filter  -->
+                <projectpanels></projectpanels>
             </div>
             <!-- Start Brief Rest Components -->
             <showbrief v-show='showBrief'></showbrief>
@@ -41,12 +21,9 @@
             <!-- Start edit project -->
             <editproject v-show='editProject'></editproject>
             <!-- Start edit Client --> 
-            <editclient v-show='editclient'></editclient>
+            <editclient v-show='editClient'></editclient>
             <!-- Start edit Brief  -->
             <editbrief v-show='editBrief'></editbrief>
-
-
-
         </colgroup>
     </div>
 </div>
@@ -54,7 +31,6 @@
 </template>
 
 <script>
-
     // Brief - resources/assets/js/components/brief
     import addbrief from './brief/add-brief.vue'
     import showbrief from './brief/show-brief.vue'
@@ -72,6 +48,7 @@
     import showproject from './project/show-project.vue'
     import editproject from './project/edit-project.vue'
     import listproject from './project/list-project.vue'
+    import projectpanels from './project/project-panels.vue'
 
     export default {
         data(){
@@ -107,6 +84,7 @@
             showproject: showproject,
             editproject: editproject,
             listproject: listproject,
+            projectpanels: projectpanels,
             // Brief Components
             addbrief: addbrief,
             showbrief:showbrief,
@@ -198,12 +176,11 @@
                 this.setSelectedClient(client);
             },
             'update-brief-rest': function (brief){
-                this.setSelectedClient(client);
+                this.setSelectedBrief(brief);
             },
             'update-project-rest': function (project){
-                this.setSelectedClient(client);
+                this.setSelectedProject(project);
             },
-
         },
         methods: {
             getDashboardData: function () {
@@ -231,7 +208,6 @@
                 this.listProject = true;
                 this.listBrief = false;
                 this.listClient = false; 
-
             },
             setSelectedProject: function(project) {
                 this.$broadcast('select-project', project);
@@ -261,8 +237,6 @@
                 this.listBrief = false; 
             },
         }
-
     }
-
 
 </script>

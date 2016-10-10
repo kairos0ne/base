@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AndThen extends Model
+class When extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class AndThen extends Model
      * @var array
      */
     protected $fillable = [
-        'and_id', 'then_id'
+        'text','scenario_id'
     ];
 
     /**
@@ -24,4 +24,13 @@ class AndThen extends Model
         'created_at','updated_at'
     ];
 
+    /**
+     * aAndwhen belongs to a feature
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function scenario()
+    {
+        return $this->belongsTo('App\Scenario');
+    }
 }

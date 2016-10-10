@@ -7,9 +7,6 @@
                             <a id="btn-save" class="btn btn-default btn-xs pull-right" v-on:click="onFormSubmit">
                                 <i class="fa fa-pencil pull-right"></i>Save
                             </a>
-                            <a id="btn-complete" class="btn btn-primary btn-xs pull-right" href="#">
-                                <i class="fa fa-tick pull-right"></i>Complete
-                            </a>
                             <input type="text" class="form-control edit_input_style_title " name="name" id="name" v-model="ClientData.name"  autocomplete="off"/>
                             
                         </li>
@@ -28,11 +25,8 @@ export default {
 
     data(){
         return {
-            ClientData: {
-            }, 
-            projectList:[],
-            briefList:[],
-            status:null,
+            ClientData: {},
+            clientID:null, 
         };
     },
      components: {
@@ -46,7 +40,7 @@ export default {
               // `this` in event callbacks are automatically bound
               // to the instance that registered it
                 this.ClientData = client; 
-                this.clientID = ClientData.id;
+                this.clientID = client.id;
                 this.$http.get('api/get/clients/' + this.clientID).then(function(client){
                     this.ParentClient = client.data;
                 });

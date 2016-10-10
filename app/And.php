@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Brief extends Model
+class And extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class Brief extends Model
      * @var array
      */
     protected $fillable = [
-        'overview','objective','project_id','status', 'jira_epic'
+        'text'
     ];
 
     /**
@@ -23,32 +23,42 @@ class Brief extends Model
     protected $hidden = [
         'created_at','updated_at'
     ];
+    /**
+     * And belongs to Scenario
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function given()
+    {
+        return $this->belongsTo('App\Scenario')->withTimestamps();
+    }
+    /**
+     * And belongs to many Given
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function given()
+    {
+        return $this->belongsToMany('App\Given')->withTimestamps();
+    }
 
     /**
-     * Brief belongs to a project
+     * And belongs to many When
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function project()
+    public function when()
     {
-        return $this->belongsTo('App\Project');
+        return $this->belongsToMany('App\When')->withTimestamps();
     }
     /**
-     * Brief belongs to many files
+     * And belongs to many When
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function files()
+    public function then()
     {
-        return $this->belongsToMany('App\File');
+        return $this->belongsToMany('App\Then')->withTimestamps();
     }
-    /**
-     * Brief belongs to many files
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function features()
-    {
-        return $this->hasMany('App\Feature');
-    }
+
 }

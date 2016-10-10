@@ -12,7 +12,7 @@ class Feature extends Model
      * @var array
      */
     protected $fillable = [
-        'feature','user_context','given', 'when', 'then', 'brief_id'
+        'feature', 'brief_id', 'jira-feature', 'mvp'
     ];
 
     /**
@@ -35,32 +35,15 @@ class Feature extends Model
     }
 
     /**
-     * A feature has many Andgivens
+     * A feature has many Scenarios
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function givenAnds()
+    public function scenarios()
     {
-        return $this->hasMany('App\Andgiven');
-    }
-    /**
-     * A feature has many and whens
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function whenAnds()
-    {
-        return $this->hasMany('App\Andwhen');
-    }
-    /**
-     * a feature has many Andthens
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function thenAnds()
-    {
-        return $this->hasMany('App\Andthen');
-    }
+        return $this->hasMany('App\Scenario');
+    }    
+
     /**
      * A feature has many bugs
      *

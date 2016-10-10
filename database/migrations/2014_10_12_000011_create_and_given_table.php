@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAndgivensTable extends Migration
+class CreateAndGivenTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,10 @@ class CreateAndgivensTable extends Migration
      */
     public function up()
     {
-        Schema::create('andgivens', function (Blueprint $table) {
+        Schema::create('and_given', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('text');
-            $table->integer('feature_id')->unsigned()->index();
-            $table->foreign('feature_id')->references('id')->on('features')->onDelete('cascade');
+            $table->integer('and_id')->references('id')->on('ands')->onDelete('cascade');
+            $table->integer('given_id')->references('id')->on('givens')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateAndgivensTable extends Migration
      */
     public function down()
     {
-        Schema::drop('andgivens');
+        Schema::drop('and_given');
     }
 }

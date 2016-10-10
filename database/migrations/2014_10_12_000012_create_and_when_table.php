@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAndthensTable extends Migration
+class CreateAndWhenTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,10 @@ class CreateAndthensTable extends Migration
      */
     public function up()
     {
-        Schema::create('andthens', function (Blueprint $table) {
+        Schema::create('and_when', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('text');
-            $table->integer('feature_id')->unsigned()->index();
-            $table->foreign('feature_id')->references('id')->on('features')->onDelete('cascade');
+            $table->integer('and_id')->references('id')->on('ands')->onDelete('cascade');
+            $table->integer('when_id')->references('id')->on('whens')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateAndthensTable extends Migration
      */
     public function down()
     {
-        Schema::drop('andthens');
+        Schema::drop('and_when');
     }
 }

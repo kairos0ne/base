@@ -1,8 +1,8 @@
 <template>
     <div id="content_pane_container" class="col-md-7 col-lg-7 col-sm-12">
         <ul id="show_project_list" class="list-group ">
-            <li id="project_title" class="list-group-item h4 ">{{ project.name }}
-                <a id="btn-edit" class="btn btn-default btn-xs pull-right" @click.prevent="editSelectedProject(project)">
+            <li id="project_title" class="list-group-item h4 ">{{ ProjectData.name }}
+                <a id="btn-edit" class="btn btn-default btn-xs pull-right" @click.prevent="editSelectedProject(ProjectData)">
                     <i class="fa fa-pencil pull-right"></i>Edit
                 </a>
                 <a id="btn-complete" class="btn btn-primary btn-xs pull-right" href="#">
@@ -11,7 +11,7 @@
                  <a class="badge_lable"><span class="badge">Briefs -&nbsp;{{briefList.length}}</span></a><br>
             </li>
             <div id="page_content_brief">
-                <p>{{ project.description }}</p>
+                <p>{{ ProjectData.description }}</p>
             </div>
         </ul>
         <listbrief></listbrief> 
@@ -24,26 +24,27 @@
     export default{
         data(){
             return{
-                project: {},
+                ProjectData: {},
                 parentClient:{},
-                briefList:[],
                 clientID:null,
                 projectID:null,
+                briefList:[],
             }
         },
         components: {
             listbrief: listbrief,
         },
+
         events: {
             'select-project': function (project) {
               // `this` in event callbacks are automatically bound
               // to the instance that registered it
-                this.project = project; 
-                this.clientID = this.project.client_id;
+                this.ProjectData = project; 
+                this.clientID = this.ProjectData.client_id;
                 this.$http.get('api/get/clients/' + this.clientID).then(function(client){
                     this.parentClient = client.data;
                 });
-                this.$http.get('api/get/briefs').then(function(briefs){
+                this.$http.get('api/get/briefs/' + this.ProjectData.id).then(function(briefs){
                     this.briefList = briefs.data;
                 });
             },

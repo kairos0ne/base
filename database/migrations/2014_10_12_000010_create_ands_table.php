@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFeaturesTable extends Migration
+class CreateAndsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,10 @@ class CreateFeaturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('features', function (Blueprint $table) {
+        Schema::create('ands', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('feature');
-            $table->integer('brief_id')->unsigned();
+            $table->string('text');
             $table->timestamps();
-
-            $table->foreign('brief_id')
-                ->references('id')
-                ->on('briefs')
-                ->onDelete('cascade');
         });
     }
 
@@ -32,6 +26,6 @@ class CreateFeaturesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('features');
+        Schema::drop('ands');
     }
 }

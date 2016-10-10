@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Project;
+use App\Client;
 use Auth;
 
 class ProjectController extends Controller
@@ -74,10 +75,21 @@ class ProjectController extends Controller
      * Get the total number of clients to assign 
      * @return int
      */
-    public function countProjects(){
+    public function countProjects()
+    {
         $projects = Project::latest()->get();
         $projectcount = count($projects);
         return $projectcount;
     }
-
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getProjectsForClient($id)
+    { 
+        $client = Client::findOrFail(1)->where('id', $id)->first();
+        $projects = $client->projects;
+        return $projects;
+    }
 }

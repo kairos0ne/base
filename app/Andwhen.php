@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Andwhen extends Model
+class AndWhen extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class Andwhen extends Model
      * @var array
      */
     protected $fillable = [
-        'text','feature_id'
+        'and_id', 'when_id'
     ];
 
     /**
@@ -23,16 +23,4 @@ class Andwhen extends Model
     protected $hidden = [
         'created_at','updated_at'
     ];
-
-    /**
-     * aAndwhen belongs to a feature
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function feature()
-    {
-        return $this->belongsTo('App\Feature');
-    }
-
-
 }

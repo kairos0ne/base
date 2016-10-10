@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Bug extends Model
+class Given extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class Bug extends Model
      * @var array
      */
     protected $fillable = [
-        'issue','summary','user_story','steps','url','feature_id','jira-key','mvp'
+        'text','scenario_id'
     ];
 
     /**
@@ -21,18 +21,26 @@ class Bug extends Model
      * @var array
      */
     protected $hidden = [
-        'created_at','updated_at',
+        'created_at','updated_at'
     ];
 
     /**
-     * A project has a client parent
+     * a Andgiven belongs to a feature
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function client()
+    public function feature()
     {
-        return $this->belongsTo('App\Feature');
+        return $this->belongsTo('App\Scenario');
     }
-
+    /**
+     * Given has many ands
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function ands()
+    {
+        return $this->belongsToMany('App\And')>withTimestamps();
+    }
 
 }

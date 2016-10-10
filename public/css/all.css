@@ -4154,6 +4154,7 @@ li#project_title.list-group-item:first-child {
     border-radius:0px;
     border-top: none;
     background-color: #e4e7e3;
+    margin-bottom: : 10px;
 }
 li#project_title_edit.list-group-item {
     display: block;
@@ -4318,6 +4319,23 @@ a.badge_lable {
     border-width: thin;
     background-color: #fff;
 }
-p.
+
+li#project_list_bar {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin: 0px 0px 0px 0px;
+    background-color: #fff;
+    border-bottom: 1px solid #777;
+}
+li#project_list_bar.list-group-item:first-child{
+    border-top: 5px solid #4f504c;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin: 5px 0px 0px 0px;
+    background-color: #fff;  
+}
+
 
 /*# sourceMappingURL=all.css.map */

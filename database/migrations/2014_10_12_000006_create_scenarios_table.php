@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFeaturesTable extends Migration
+class CreateScenariosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,15 @@ class CreateFeaturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('features', function (Blueprint $table) {
+        Schema::create('scenarios', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('feature');
-            $table->integer('brief_id')->unsigned();
+            $table->text('user_context');
+            $table->integer('feature_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('brief_id')
+            $table->foreign('feature_id')
                 ->references('id')
-                ->on('briefs')
+                ->on('features')
                 ->onDelete('cascade');
         });
     }
@@ -32,6 +32,6 @@ class CreateFeaturesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('features');
+        Schema::drop('scenarios');
     }
 }

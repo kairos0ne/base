@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBugsTable extends Migration
+class CreateThensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,14 @@ class CreateBugsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bugs', function (Blueprint $table) {
+        Schema::create('thens', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('issue');
-            $table->longText('description');
-            $table->longText('context');
-            $table->longText('steps');
-            $table->string('url');
+            $table->string('text');
             $table->integer('feature_id')->unsigned()->index();
-            $table->foreign('feature_id')->references('id')->on('features')->onDelete('cascade');
+            $table->foreign('feature_id')
+                ->references('id')
+                ->on('features')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,7 +31,6 @@ class CreateBugsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('bugs');
+        Schema::drop('thens');
     }
 }
-
