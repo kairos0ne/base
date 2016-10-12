@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AndWhen extends Model
+class ContinuationGiven extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class AndWhen extends Model
      * @var array
      */
     protected $fillable = [
-        'and_id', 'when_id'
+        'and_id', 'given_id'
     ];
 
     /**
@@ -23,4 +23,5 @@ class AndWhen extends Model
     protected $hidden = [
         'created_at','updated_at'
     ];
+
 }

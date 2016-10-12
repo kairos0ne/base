@@ -68,6 +68,6 @@ class Scenario extends Model
      */
     public function ands()
     {
-        return $this->hasMany('App\And');
+        return $this->hasMany('App\Continuation');
     }
 }
