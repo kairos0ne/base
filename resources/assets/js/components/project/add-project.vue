@@ -38,7 +38,9 @@ export default {
             newProjectData: {
                 client_id: null,
                 name: '',
-                description: ''
+                description: '',
+                status:'New',
+                status_value:1,
             }
         };
     },
@@ -78,7 +80,9 @@ export default {
             this.newProjectData = {
                 name: '',
                 description: '',
-                client_id: null
+                client_id: null, 
+                status:'',
+                status_value:null,
             };
             // send ajax request
             this.$http.post('/api/post/projects', request);

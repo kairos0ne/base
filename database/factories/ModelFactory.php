@@ -19,32 +19,15 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
-
-$factory->define(App\Portfolio::class, function (Faker\Generator $faker) {
-    return [
-        'user_id' => factory('App\User')->create()->id,
-        'title' => $faker->sentence,
-        'subtitle' => $faker->sentence,
-        'description' => $faker->text,
-        'thumbnail' => 'https://placeholdit.imgix.net/~text?txtsize=23&txt=200%C3%97120&w=200&h=120',
-        'pdfurl' => $faker->url,
-        'intro'=> $faker->text,
-        'bodycontent' => $faker->text,
-    ];
-});
 $factory->define(App\Brief::class, function (Faker\Generator $faker) {
     return [
         'project_id' => factory('App\Project')->create()->id,
         'overview' => $faker->paragraph(),
         'objective' => $faker->paragraph(),
+        'ticket' => $faker->unique()->randomNumber,
+        'status' => 'New',
+        'jira_epic' => str_random(10),
 
-    ];
-});
-$factory->define(App\Access::class, function (Faker\Generator $faker) {
-    return [
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'session_token' => str_random(10),
     ];
 });
 $factory->define(App\Project::class, function (Faker\Generator $faker) {
@@ -52,24 +35,15 @@ $factory->define(App\Project::class, function (Faker\Generator $faker) {
         'client_id' => factory('App\Client')->create()->id,
         'name' => $faker->sentence(),
         'description' => $faker->paragraph(),
+        'status' => 'New',
+        'status_value' => $faker->unique()->randomNumber,
+
     ];
 });
 $factory->define(App\Client::class, function (Faker\Generator $faker) {
     return [
         'user_id' => factory('App\User')->create()->id,
-        'name' => $faker->sentence(),
-        'business_area' => $faker->paragraph(),
-    ];
-});
-$factory->define(App\File::class, function (Faker\Generator $faker) {
-    return [
-        'user_id' => factory('App\User')->create()->id,
-        'portfolio_id' => factory('App\Portfolio')->create()->id,
-        'project_id' => factory('App\Project')->create()->id,
-        'client_id' => factory('App\Client')->create()->id,
-        'brief_id' => factory('App\Brief')->create()->id,
-        'type' => 'PDF',
-        'name' => $faker->name(),
-        'path' => $faker->url(),
+        'name' => $faker->company(),
+        'business_area' => $faker->bs()
     ];
 });

@@ -69,29 +69,33 @@ Route::group(['middleware' => 'web'], function () {
         return $client;
     });
 /**  All Project related api routes **/
+    // Get all projects for the signed in user
+    Route::get('api/get/projects', [
+        'as' => 'projects', 'uses' => 'ProjectController@index'
+    ]);
+    // Get a single project
+    Route::get('api/get/project/{id}', [
+        'as' => 'project', 'uses' => 'ProjectController@show'
+    ]);
     // Post to a new Project to the DB
     Route::post('api/post/projects', [
-        'as' => 'api.projects.store', 'uses' => 'ProjectController@store'
+        'as' => 'add-project', 'uses' => 'ProjectController@store'
     ]);
     // Update a single Project 
     Route::put('api/put/project/{id}', [
-        'as' => 'api.project.update', 'uses' => 'ProjectController@update'
+        'as' => 'edit-project', 'uses' => 'ProjectController@update'
     ]);
-    // Get all projects for the signed in user
-    Route::get('api/get/projects', [
-        'as' => 'api.get.projects', 'uses' => 'ProjectController@index'
-    ]);
-    Route::get('api/get/project/{id}', function($id){
-        // Get the users project where the 
-        $project = Project::findOrFail(1)->where('id', $id)->first();
-        return $project;
-    });
     // Get all projects for the parsed client  
     Route::get('api/get/projects/{id}', [
-        'as' => 'client.projects', 'uses' => 'ProjectController@getProjectsForClient'
+        'as' => 'client-projects', 'uses' => 'ProjectController@getProjectsForClient'
     ]);
 
 /**  All Brief related api routes **/ 
+    // Get all briefs for the signed in user 
+    Route::get('api/get/briefs', [
+        'as' => 'api.get.briefs', 'uses' => 'BriefController@index'
+    ]);
+    // Store a brief
     Route::post('api/post/briefs', [
         'as' => 'api.briefs.store', 'uses' => 'BriefController@store'
     ]);
@@ -99,14 +103,10 @@ Route::group(['middleware' => 'web'], function () {
     Route::put('api/put/brief/{id}', [
         'as' => 'api.brief.update', 'uses' => 'BriefController@update'
     ]);
-    Route::get('api/get/briefs', [
-        'as' => 'api.get.briefs', 'uses' => 'BriefController@index'
+    
+    Route::get('api/get/brief/{id}', [
+        'as' => 'project-briefs', 'uses' => 'BriefController@show'
     ]);
-    Route::get('api/get/brief/{id}', function($id){
-        // Get the users project where the 
-        $brief = Brief::findOrFail(1)->where('id', $id)->first();
-        return $brief;
-    });
     Route::get('api/get/briefs/{id}', [
         'as' => 'projects.briefs', 'uses' => 'BriefController@getBriefsForProject'
     ]);

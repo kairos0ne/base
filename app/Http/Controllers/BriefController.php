@@ -56,13 +56,14 @@ class BriefController extends Controller
     }
 
     /**
-     * Display single briefs
+     * Display single brief
      * @param $id
-     * @return mixed
+     * @return Response
      */
     public function show($id)
     {
-        $brief = Brief::findOrFail($id)->get();
+        // Get a single brief
+        $brief = Brief::findOrFail(1)->where('id', $id)->first();
         return $brief;
     }
 

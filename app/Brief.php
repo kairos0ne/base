@@ -12,7 +12,7 @@ class Brief extends Model
      * @var array
      */
     protected $fillable = [
-        'overview','objective','project_id','status', 'jira_epic'
+        'overview','objective','project_id','ticket', 'jira_epic', 'status'
     ];
 
     /**

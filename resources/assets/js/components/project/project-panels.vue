@@ -21,11 +21,9 @@
 	    <!-- Start List View -->
 		<ul v-show="listView" class="list-group">
             <li id="project_list_bar" class="list-group-item" v-for="project in projectList" @click.prevent="fireProjectEvent(project)">
-                {{item.name}}
+                {{project.name}}
             </li>
         </ul>	    
-	        <hr>
-	    </li>
 	</ul>
 </template>
 <script>

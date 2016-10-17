@@ -44,6 +44,16 @@ class ProjectController extends Controller
     }
 
     /**
+     * Show a single project 
+     * @param string $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show ($id)
+    {
+        $project = Project::findOrFail(1)->where('id', $id)->first();
+        return $project;
+    }
+    /**
      * Store a Project in the database
      * include validation on for required fields
      * @param  Illuminate\Http\Request  $request
@@ -51,11 +61,13 @@ class ProjectController extends Controller
      */
     public  function store(Request $request)
     {
-        $this->validate($request, ['name' => 'required', 'description' => 'required', 'client_id' => 'required']);
+        $this->validate($request, ['name' => 'required', 'description' => 'required', 'client_id' => 'required', 'status' => 'required', 'status_value' => 'required']);
         Project::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
-            'client_id' => $request->input('client_id')
+            'client_id' => $request->input('client_id'),
+            'status' => $request->input('status'),
+            'status_value' => $request->input('status_value')
         ]);
 
     }
@@ -68,8 +80,8 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, ['name' => 'required', 'description' => 'required', 'client_id' => 'required']);
-        $project = Project::where('id', $id)->update([  'name' => $request->input('name'),'description' => $request->input('description'),'client_id' => $request->input('client_id')]);
+        $this->validate($request, ['name' => 'required', 'description' => 'required', 'client_id' => 'required', 'status' => 'required', 'status_value' => 'required']);
+        $project = Project::where('id', $id)->update(['name' => $request->input('name'),'description' => $request->input('description'),'client_id' => $request->input('client_id'), 'status' => $request->input('status'), 'status_value' => $request->input('status_value')]);
     }
     /**
      * Get the total number of clients to assign 
