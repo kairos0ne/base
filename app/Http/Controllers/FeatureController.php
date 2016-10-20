@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Brief;
 use Illuminate\Http\Request;
 use Auth;
-use App\Project;
-use App\Client;
+use App\Brief;
+use App\Feature;
 
 
-class BriefController extends Controller
+class FeatureController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -36,6 +35,7 @@ class BriefController extends Controller
         // Lopp through clients and get the projects for each client and if the value is not null, return the projects
         $projects = array();
         $briefs = array();
+        $features = array();
         foreach ($clients as $client) {
             if (null !== $client->projects) {
                 $items = $client->projects;
@@ -51,45 +51,49 @@ class BriefController extends Controller
             foreach ($briefitems as $briefitem){
                 array_push($briefs, $briefitem);
             }
-        }       
-        return $briefs;     
+        }
+        foreach ($briefs as $brief) {
+           	if (null !== $brief->features) {
+               	$featureitems = $brief->features;
+           	}
+       		foreach ($featureitems as $featureitem) {
+               	array_push($features, $featureitem);
+               	}
+           }       
+        return $features;     
     }
 
     /**
-     * Display single brief
+     * Display single Feature
      * @param $id
      * @return Response
      */
     public function show($id)
     {
         // Get a single brief
-        $brief = Brief::findOrFail(1)->where('id', $id)->first();
-        return $brief;
+        $feature = Feature::findOrFail(1)->where('id', $id)->first();
+        return $feature;
     }
 
     /**
-     * Store a brief in the database
+     * Store a feature in the database
      * include validation on for required fields
      * @param  Illuminate\Http\Request  $request
      * @return Response
      */
     public  function store(Request $request)
     {
-        $this->validate($request, ['overview' => 'required', 'objective' => 'required', 'project_id' => 'required']);
-        Brief::create([
-            'overview' => $request->input('overview'),
-            'objective' => $request->input('objective'),
-            'project_id' => $request->input('project_id'),
-            'status' => $request->input('status'),
-            'status_value' => $request->input('status_value'), 
-            'ticket' => $request->input('ticket'),
-            'jira_epic' => $request->input('jira_epic'),
+        $this->validate($request, ['feature' => 'required', 'brief_id' => 'required']);
+        Feature::create([
+            'feature' => $request->input('feature'),
+            'brief_id' => $request->input('brief_id'),
+
         ]);
     }
 
     /**
-     * Update the specified Brief
-     * Include validation on required fields 
+     * Update the specified Brief.
+     *
      * @param  Request  $request
      * @param  string  $id
      * @return Response
@@ -97,35 +101,24 @@ class BriefController extends Controller
     public function update(Request $request, $id)
     {
         // validate required data 
-        $this->validate($request, ['overview' => 'required', 'objective' => 'required', 'project_id' => 'required']);
+        $this->validate($request, ['feature' => 'required',  'brief_id' => 'required']);
         // Do the update 
-        $brief = Brief::where('id', $id)
-                        ->update(['overview' => $request->input('overview'), 
-                                    'objective' => $request->input('objective'),
-                                    'project_id' => $request->input('project_id')]);
+        $feature = Feature::where('id', $id)
+                        ->update(['feature' => $request->input('feature'), 
+                                    'brief_id' => $request->input('brief_id')]);
     }
 
      /**
-     * Show the application dashboard.
-     * @param  string  $id
+     * Get the features for a given brief object through it's ID 
+     *
      * @return \Illuminate\Http\Response
      */
-    public function getBriefsForProject($id)
+    public function getFeaturesForBrief($id)
     {
         
-        $project = Project::findOrFail(1)->where('id', $id)->first();
-        $briefs = $project->briefs;
-        return $briefs;
+        $brief = Brief::findOrFail(1)->where('id', $id)->first();
+        $features = $brief->features;
+        return $features;
 
-    }
-    /**
-     * Get the total number of briefs in the system
-     * @return \Illuminate\Http\Response
-     */
-    public function briefcount ()
-    {
-        $briefs = Brief::latest()->get();
-        $briefcount = count($briefs);
-        return $briefcount;
     }
 }

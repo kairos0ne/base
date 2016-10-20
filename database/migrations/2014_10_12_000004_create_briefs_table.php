@@ -17,7 +17,7 @@ class CreateBriefsTable extends Migration
             $table->longText('overview');
             $table->longText('objective');
             $table->integer('project_id')->unsigned();
-            $table->integer('status_value')->unsigned();
+            $table->integer('status_value');
             $table->text('status');
             $table->string('ticket', 100);
             $table->string('jira_epic', 100);

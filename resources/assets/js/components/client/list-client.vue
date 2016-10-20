@@ -1,7 +1,10 @@
 <template>
 	<div class="list-group ">
 	    <li  class="list-group-item h4">Clients</li>
-        <li @click.prevent="setSelectedClient(client)" class="client_panel" v-for="client in clientList | orderBy 'name'">{{ client.name }}</li>
+        <li @click.prevent="setSelectedClient(client)" class="client_panel" v-for="client in clientList | orderBy 'name'">
+            <i class="fa fa-folder"></i>&nbsp;
+            {{ client.name }}
+        </li>
 	</div>
 </template>
 <script>

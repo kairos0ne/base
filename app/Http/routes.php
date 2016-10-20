@@ -36,9 +36,7 @@ Route::group(['middleware' => 'web'], function () {
 | kernel and includes session state, CSRF protection, and more.
 */
 
-/**
- * Get user
- */
+/** Get user  **/
 
     Route::get('api/get/user', function(){
         $user = Auth::user();
@@ -47,27 +45,22 @@ Route::group(['middleware' => 'web'], function () {
 
 /**  All Client related api routes **/ 
     Route::post('api/post/clients', [
-        'as' => 'api.clients.store', 'uses' => 'ClientController@store'
+        'as' => 'add-client', 'uses' => 'ClientController@store'
     ]);
     // Update a single Client 
     Route::put('api/put/client/{id}', [
-        'as' => 'api.client.update', 'uses' => 'ClientController@update'
+        'as' => 'edit-client', 'uses' => 'ClientController@update'
     ]); 
     // Get all clients associated to the logged in user
     Route::get('api/get/clients', [
-        'as' => 'api.get.clients', 'uses' => 'ClientController@index'
+        'as' => 'clients', 'uses' => 'ClientController@index'
     ]);
-    Route::get('api/get/client/{id}', function($id){
-        // Get the users project where the 
-        $client = Client::findOrFail(1)->where('id', $id)->first();
-        return $client;
-    });
-    // Get the parent client for the parsed brief using the client_id attribute 
-    Route::get('api/get/clients/{id}', function($id){
-        // Get the users client where the ID is equal to the parsed ID
-        $client = Client::findOrFail(1)->where('id', $id)->first();
-        return $client;
-    });
+    Route::get('api/get/client/{id}', [
+        'as' => 'client', 'uses' => 'ClientController@show'
+    ]);
+    Route::get('api/get/clients/{id}', [
+        'as' => 'client', 'uses' => 'ClientController@show'
+    ]);
 /**  All Project related api routes **/
     // Get all projects for the signed in user
     Route::get('api/get/projects', [
@@ -93,23 +86,66 @@ Route::group(['middleware' => 'web'], function () {
 /**  All Brief related api routes **/ 
     // Get all briefs for the signed in user 
     Route::get('api/get/briefs', [
-        'as' => 'api.get.briefs', 'uses' => 'BriefController@index'
+        'as' => 'briefs', 'uses' => 'BriefController@index'
     ]);
     // Store a brief
     Route::post('api/post/briefs', [
-        'as' => 'api.briefs.store', 'uses' => 'BriefController@store'
+        'as' => 'add-brief', 'uses' => 'BriefController@store'
     ]);
     // Update a single brief 
     Route::put('api/put/brief/{id}', [
-        'as' => 'api.brief.update', 'uses' => 'BriefController@update'
+        'as' => 'edit-brief', 'uses' => 'BriefController@update'
     ]);
     
     Route::get('api/get/brief/{id}', [
-        'as' => 'project-briefs', 'uses' => 'BriefController@show'
+        'as' => 'brief', 'uses' => 'BriefController@show'
     ]);
     Route::get('api/get/briefs/{id}', [
-        'as' => 'projects.briefs', 'uses' => 'BriefController@getBriefsForProject'
+        'as' => 'project-briefs', 'uses' => 'BriefController@getBriefsForProject'
     ]);
+
+/**  All Feature related api routes **/ 
+    // Get all features for the signed in user 
+    Route::get('api/get/features', [
+        'as' => 'features', 'uses' => 'FeatureController@index'
+    ]);
+    // Store a feature
+    Route::post('api/post/feature', [
+        'as' => 'add-feature', 'uses' => 'FeatureController@store'
+    ]);
+    // Update a single feature 
+    Route::put('api/put/feature/{id}', [
+        'as' => 'edit-feature', 'uses' => 'FeatureController@update'
+    ]);
+    
+    Route::get('api/get/feature/{id}', [
+        'as' => 'feature', 'uses' => 'FeatureController@show'
+    ]);
+    Route::get('api/get/features/{id}', [
+        'as' => 'brief-features', 'uses' => 'FeatureController@getFeaturesForBrief'
+    ]);
+    /**  All Scenarios related api routes **/ 
+    // Get all Scenarios for the signed in user 
+    Route::get('api/get/scenarios', [
+        'as' => 'scenarios', 'uses' => 'ScenarioController@index'
+    ]);
+    // Store a scenario
+    Route::post('api/post/scenario', [
+        'as' => 'add-scenario', 'uses' => 'ScenarioController@store'
+    ]);
+    // Update a single scenario 
+    Route::put('api/put/scenario/{id}', [
+        'as' => 'edit-scenario', 'uses' => 'ScenarioController@update'
+    ]);
+    // Get single Scenario
+    Route::get('api/get/scenario/{id}', [
+        'as' => 'scenario', 'uses' => 'ScenarioController@show'
+    ]);
+    // Get all scenarios for a provided feature 
+    Route::get('api/get/scenarios/{id}', [
+        'as' => 'feature-scenario', 'uses' => 'ScenarioController@getScenariosForFeature'
+    ]);
+
 /*
 |--------------------------------------------------------------------------
 | API routes count items
@@ -117,19 +153,13 @@ Route::group(['middleware' => 'web'], function () {
 | These routes contain the api values for item counts for persisting to the DB. 
 |
 */
-    Route::get('api/get/clientcount', function(){
-        $clients = Client::latest()->get();
-        $clientcount = count($clients);
-        return $clientcount;
-    });
-    Route::get('api/get/projectcount', function(){
-        $projects = Project::latest()->get();
-        $projectcount = count($projects);
-        return $projectcount;
-    });
-    Route::get('api/get/briefcount', function(){
-        $briefs = Brief::latest()->get();
-        $briefcount = count($briefs);
-        return $briefcount;
-    });
+    Route::get('api/get/clientcount', [
+        'as' => 'client-count', 'uses' => 'ClientController@clientcount'
+    ]);
+    Route::get('api/get/projectcount', [
+        'as' => 'project-count', 'uses' => 'ProjectController@projectcount'
+    ]);
+    Route::get('api/get/briefcount', [
+        'as' => 'brief-count', 'uses' => 'BriefController@briefcount'
+    ]);
 });

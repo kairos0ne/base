@@ -38,6 +38,9 @@
                     overview:'',
                     objective:'',
                     project_id: null,
+                    status:'New',
+                    status_value:1,
+                    ticket:1,
                 }
             }
         },

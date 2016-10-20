@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
-use App\Brief;
 use Illuminate\Http\Request;
 use Auth;
-use App\Project;
-use App\Client;
+use App\Scenario;
+use App\Feature;
 
 
-class BriefController extends Controller
+class ScenarioController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -36,6 +35,8 @@ class BriefController extends Controller
         // Lopp through clients and get the projects for each client and if the value is not null, return the projects
         $projects = array();
         $briefs = array();
+        $features = array();
+        $scenarios = arra();
         foreach ($clients as $client) {
             if (null !== $client->projects) {
                 $items = $client->projects;
@@ -51,45 +52,57 @@ class BriefController extends Controller
             foreach ($briefitems as $briefitem){
                 array_push($briefs, $briefitem);
             }
-        }       
-        return $briefs;     
+        }
+        foreach ($briefs as $brief) {
+           	if (null !== $brief->features) {
+               	$featureitems = $brief->features;
+           	}
+       		foreach ($featureitems as $featureitem) {
+               	array_push($features, $featureitem);
+               	}
+           }
+       foreach ($features as $feature) {
+       		if (null !== $feature->scenarios) {
+              	$scenarioitems = $feature->scenarios;
+            }
+       		foreach ($scenarioitems as $scenarioitem) {
+              	array_push($scenarios, $scenarioitem);
+            }
+		}       
+        return $scenarios;     
     }
 
     /**
-     * Display single brief
+     * Display single Scenario
      * @param $id
      * @return Response
      */
     public function show($id)
     {
         // Get a single brief
-        $brief = Brief::findOrFail(1)->where('id', $id)->first();
-        return $brief;
+        $scenario = Scenario::findOrFail(1)->where('id', $id)->first();
+        return $scenario;
     }
 
     /**
-     * Store a brief in the database
+     * Store a scenario in the database
      * include validation on for required fields
      * @param  Illuminate\Http\Request  $request
      * @return Response
      */
     public  function store(Request $request)
     {
-        $this->validate($request, ['overview' => 'required', 'objective' => 'required', 'project_id' => 'required']);
-        Brief::create([
-            'overview' => $request->input('overview'),
-            'objective' => $request->input('objective'),
-            'project_id' => $request->input('project_id'),
-            'status' => $request->input('status'),
-            'status_value' => $request->input('status_value'), 
-            'ticket' => $request->input('ticket'),
-            'jira_epic' => $request->input('jira_epic'),
+        $this->validate($request, ['user_context' => 'required', 'feature_id' => 'required']);
+        Scenario::create([
+            'user_context' => $request->input('user_context'),
+            'feature_id' => $request->input('feature_id'),
+
         ]);
     }
 
     /**
-     * Update the specified Brief
-     * Include validation on required fields 
+     * Update the specified Brief.
+     *
      * @param  Request  $request
      * @param  string  $id
      * @return Response
@@ -97,35 +110,23 @@ class BriefController extends Controller
     public function update(Request $request, $id)
     {
         // validate required data 
-        $this->validate($request, ['overview' => 'required', 'objective' => 'required', 'project_id' => 'required']);
+        $this->validate($request, ['user_context' => 'required',  'feature_id' => 'required']);
         // Do the update 
-        $brief = Brief::where('id', $id)
-                        ->update(['overview' => $request->input('overview'), 
-                                    'objective' => $request->input('objective'),
-                                    'project_id' => $request->input('project_id')]);
+        $scenario = Scenario::where('id', $id)
+                        ->update(['user_context' => $request->input('user_context'), 
+                                    'feature_id' => $request->input('feature_id')]);
     }
 
      /**
-     * Show the application dashboard.
-     * @param  string  $id
+     * Get the scenarios for a given feature object through it's ID 
      * @return \Illuminate\Http\Response
      */
-    public function getBriefsForProject($id)
+    public function getScenariosForFeature($id)
     {
         
-        $project = Project::findOrFail(1)->where('id', $id)->first();
-        $briefs = $project->briefs;
-        return $briefs;
+        $feature = Feature::findOrFail(1)->where('id', $id)->first();
+        $scenarios = $feature->scenarios;
+        return $scenarios;
 
-    }
-    /**
-     * Get the total number of briefs in the system
-     * @return \Illuminate\Http\Response
-     */
-    public function briefcount ()
-    {
-        $briefs = Brief::latest()->get();
-        $briefcount = count($briefs);
-        return $briefcount;
     }
 }

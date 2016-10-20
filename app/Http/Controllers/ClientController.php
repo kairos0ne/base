@@ -43,17 +43,9 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        $client = Client::findOrFail($id)->get();
-        return view('client.show', compact('client'));
-    }
-
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * store clients 
-     */
-    public function create ()
-    {
-        return view('client.create');
+         // Get a single client that maches the id provided 
+        $client = Client::findOrFail(1)->where('id', $id)->first();
+        return $client;
     }
     /**
      * Store a client in the database
@@ -85,5 +77,16 @@ class ClientController extends Controller
                         ->update([  'name' => $request->input('name'), 
                                     'business_area' => $request->input('business_area'),
                                     'user_id'=> $request->input('user_id')]);
+    }
+    /**
+     * Get total client count for a user 
+     *  
+     * @return \Illuminate\Http\Response
+     */
+    public function clientcount ()
+    {
+        $clients = Client::latest()->get();
+        $clientcount = count($clients);
+        return $clientcount;
     }
 }

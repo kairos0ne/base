@@ -51,16 +51,13 @@
     import projectpanels from './project/project-panels.vue'
 
     export default {
+        name: 'dashboard',
         data(){
             return {
-                formData: [],
                 user: null,
                 userRole:null,
                 userGroup:null,
                 team:null,
-                clientList: [],
-                projectList: [],
-                briefList: [],
                 showClient: false,
                 showProject: false,
                 showBrief: false,
@@ -70,7 +67,6 @@
                 listProject:false,
                 listClient:false,
                 listBrief:false,
-
             };
         },
         components: {
@@ -93,7 +89,7 @@
 
         },
         ready() {
-            this.getDashboardData();
+            
         },
         events: {
             'setEditProjectFalse': function () {
@@ -183,17 +179,7 @@
             },
         },
         methods: {
-            getDashboardData: function () {
-                this.$http.get('/api/get/clients').then(function(clients){
-                    this.clientList = clients.data;
-                });
-                this.$http.get('/api/get/projects').then(function (projects) {
-                    this.projectList = projects.data;
-                });
-                this.$http.get('/api/get/briefs').then(function (briefs) {
-                    this.briefList = briefs.data;
-                });
-            },
+            // Insert main application methods here 
             setSelectedClient: function(client) {
                 this.$broadcast('select-client', client);
                 this.$broadcast('edit-client', client);
@@ -236,7 +222,7 @@
                 this.listProject = false; 
                 this.listBrief = false; 
             },
-        }
+        },
     }
 
 </script>

@@ -26,6 +26,7 @@ $factory->define(App\Brief::class, function (Faker\Generator $faker) {
         'objective' => $faker->paragraph(),
         'ticket' => $faker->unique()->randomNumber,
         'status' => 'New',
+        'status_value' => '1',
         'jira_epic' => str_random(10),
 
     ];
@@ -36,7 +37,7 @@ $factory->define(App\Project::class, function (Faker\Generator $faker) {
         'name' => $faker->sentence(),
         'description' => $faker->paragraph(),
         'status' => 'New',
-        'status_value' => $faker->unique()->randomNumber,
+        'status_value' => '1',
 
     ];
 });

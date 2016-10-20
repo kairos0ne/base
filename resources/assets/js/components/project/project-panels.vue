@@ -6,10 +6,10 @@
 	        <a href="{filter}"><span class="fa fa-filter fa-pull-right"></a></span>
 	    </li>
 	    
-	    <li v-show="cardView" v-for="project in projectList" class="project_panel"><a href="#">
-	        <div id="project_panel_title" @click.prevent="fireProjectEvent(project)">{{ project.name }}<a><span class="fa fa-pencil-square fa-lg fa-pull-right"></a></span></div></a>
-	        <p id="project_panel_client">Description: {{ project.description }}  </p>
-	        <p id="project_panel_BusUnit">Client: {{ ClientData.name }} | Business Area: {{ ClientData.business_area}} </p>
+	    <li v-show="cardView" v-for="project in projectList" class="project_panel"><a>
+	        <div id="project_panel_title" @click.prevent="fireProjectEvent(project)"><i class="fa fa-briefcase"></i>&nbsp;{{ project.name }}</div></a>
+            <p id="project_panel_BusUnit">{{project.description}}</p>
+	        <p id="project_panel_BusUnit"><i class="fa fa-folder"></i>&nbsp;<strong>Client:</strong>&nbsp;{{ ClientData.name }}</p>
 	        <div id="progress_bar_ID"class="progress">
 	            <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
 	                <span class="sr-only"></span>
@@ -20,9 +20,12 @@
 
 	    <!-- Start List View -->
 		<ul v-show="listView" class="list-group">
-            <li id="project_list_bar" class="list-group-item" v-for="project in projectList" @click.prevent="fireProjectEvent(project)">
-                {{project.name}}
-            </li>
+            <a>
+                <li id="project_list_bar" class="list-group-item" v-for="project in projectList" @click.prevent="fireProjectEvent(project)">
+                    <i class="fa fa-briefcase"></i>&nbsp;
+                    {{project.name}}
+                </li>
+            </a>
         </ul>	    
 	</ul>
 </template>

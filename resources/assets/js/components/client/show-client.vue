@@ -8,7 +8,7 @@
                 <a id="btn-complete" class="btn btn-primary btn-xs pull-right" href="#">
                     <i class="fa fa-tick pull-right"></i>Complete
                 </a>
-                <a class="badge_lable"><span class="badge">Projects -&nbsp;{{projectList.length}}</span></a><br>
+                <a class="badge_lable"><span class="badge"><i class="fa fa-briefcase" ></i>&nbsp;Projects -&nbsp;{{projectList.length}}</span></a><br>
             </li>
             <div id="page_content_brief">
                 <h4>{{ currentClient.business_area }}</h3>

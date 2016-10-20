@@ -41,16 +41,17 @@ export default {
                 description: '',
                 status:'New',
                 status_value:1,
+                selectedClient:{},
             }
         };
     },
     created(){
         // Get the client ID 
         this.getClientId();
-        // Get the project count
-        this.getProjectCount();
     },
-
+    props:{
+        client:{},
+    },
     methods: {
         setProjectAdded: function () {
             this.showproject = false;
@@ -62,12 +63,7 @@ export default {
             // update the project count.
             this.getProjectCount();
             // Add the project id to parent vm
-            this.$parent.currentProject.id = this.count + 1;
             var request = this.newProjectData;
-            // add the client to client to a client object on the parent view model
-            this.$parent.currentProject.client_id = request.client_id;
-            this.$parent.currentProject.name = request.name;
-            this.$parent.currentProject.description = request.description;
             // show thanks message
             this.submitted = true;
             //set showarea to false
@@ -80,7 +76,7 @@ export default {
             this.newProjectData = {
                 name: '',
                 description: '',
-                client_id: null, 
+                client_id: null,
                 status:'',
                 status_value:null,
             };
@@ -88,7 +84,7 @@ export default {
             this.$http.post('/api/post/projects', request);
         },
         getClientId: function () {
-            this.newProjectData.client_id = this.$parent.currentClient.id;
+            this.newProjectData.client_id = this.client 
         },
         getProjectCount: function() {
             this.$http.get('/api/get/projectcount').then(function (projectcount) {

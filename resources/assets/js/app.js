@@ -24,15 +24,19 @@ router.map({
         component: Vue.extend({template: '<h4>404 Not found</h4>'})
     },
     '/dashboard': {
+        name: 'dashboard',
         component: dashboardView
     },
     '/': {
+        name: 'foundation',
         component: foundationView
     },
     '/foundation': {
+        name: 'foundation',
         component: foundationView
     },
     '/introduction': {
+        name: 'introduction',
         component: introductionView
     },
 })

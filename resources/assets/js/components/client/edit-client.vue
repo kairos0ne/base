@@ -41,7 +41,7 @@ export default {
               // to the instance that registered it
                 this.ClientData = client; 
                 this.clientID = client.id;
-                this.$http.get('api/get/clients/' + this.clientID).then(function(client){
+                this.$http.get('api/get/client/' + this.clientID).then(function(client){
                     this.ParentClient = client.data;
                 });
             },

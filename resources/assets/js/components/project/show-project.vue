@@ -8,7 +8,9 @@
                 <a id="btn-complete" class="btn btn-primary btn-xs pull-right" href="#">
                     <i class="fa fa-tick pull-right"></i>Complete
                 </a>
-                 <a class="badge_lable"><span class="badge">Briefs -&nbsp;{{briefList.length}}</span></a><br>
+                 <a class="badge_lable"><span class="badge"><i class="fa fa-book" ></i>&nbsp;Briefs -&nbsp;{{briefList.length}}</span></a>
+                    
+                 <br>
             </li>
             <div id="page_content_brief">
                 <p>{{ ProjectData.description }}</p>
@@ -41,7 +43,7 @@
               // to the instance that registered it
                 this.ProjectData = project; 
                 this.clientID = this.ProjectData.client_id;
-                this.$http.get('api/get/clients/' + this.clientID).then(function(client){
+                this.$http.get('api/get/client/' + this.clientID).then(function(client){
                     this.parentClient = client.data;
                 });
                 this.$http.get('api/get/briefs/' + this.ProjectData.id).then(function(briefs){

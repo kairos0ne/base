@@ -39,7 +39,7 @@
               this.$http.get('api/get/projects/' + this.projectID).then(function(project){
                 this.parentProject = project.data;
                 this.clientID = this.parentProject.client_id;
-                this.$http.get('api/get/clients/' + this.clientID).then(function(client){
+                this.$http.get('api/get/client/' + this.clientID).then(function(client){
                 this.parentClient = client.data;
               });
               });

@@ -104,4 +104,10 @@ class ProjectController extends Controller
         $projects = $client->projects;
         return $projects;
     }
+    public function projectcount ()
+    {
+        $projects = Project::latest()->get();
+        $projectcount = count($projects);
+        return $projectcount;
+    }
 }
