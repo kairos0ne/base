@@ -1,7 +1,6 @@
 process.env.DISABLE_NOTIFIER = true;
 var elixir = require('laravel-elixir');
 require('laravel-elixir-vueify');
-require("vue-focus");
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management - Sublime is realtime

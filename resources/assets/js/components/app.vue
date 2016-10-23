@@ -51,7 +51,7 @@
     import projectpanels from './project/project-panels.vue'
 
     export default {
-        name: 'dashboard',
+        name: 'Platform',
         data(){
             return {
                 user: null,
@@ -222,6 +222,7 @@
                 this.listProject = false; 
                 this.listBrief = false; 
             },
+            
         },
     }
 

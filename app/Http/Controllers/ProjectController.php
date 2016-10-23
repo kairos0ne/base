@@ -61,13 +61,14 @@ class ProjectController extends Controller
      */
     public  function store(Request $request)
     {
-        $this->validate($request, ['name' => 'required', 'description' => 'required', 'client_id' => 'required', 'status' => 'required', 'status_value' => 'required']);
+        $this->validate($request, ['name' => 'required', 'description' => 'required', 'client_id' => 'required', 'status' => 'required', 'status_value' => 'required', 'type' => 'required']);
         Project::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'client_id' => $request->input('client_id'),
             'status' => $request->input('status'),
-            'status_value' => $request->input('status_value')
+            'status_value' => $request->input('status_value'),
+            'type'=> $request->input('type')
         ]);
 
     }
@@ -80,8 +81,14 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, ['name' => 'required', 'description' => 'required', 'client_id' => 'required', 'status' => 'required', 'status_value' => 'required']);
-        $project = Project::where('id', $id)->update(['name' => $request->input('name'),'description' => $request->input('description'),'client_id' => $request->input('client_id'), 'status' => $request->input('status'), 'status_value' => $request->input('status_value')]);
+        $this->validate($request, ['name' => 'required', 'description' => 'required', 'client_id' => 'required', 'status' => 'required', 'status_value' => 'required', 'type' => 'required']);
+        $project = Project::where('id', $id)->update(['name' => $request->input('name'),
+                                                        'description' => $request->input('description'),
+                                                        'client_id' => $request->input('client_id'), 
+                                                        'status' => $request->input('status'), 
+                                                        'status_value' => $request->input('status_value'),
+                                                        'type' => $request->input('type')
+        ]);
     }
     /**
      * Get the total number of clients to assign 
@@ -108,6 +115,7 @@ class ProjectController extends Controller
     {
         $projects = Project::latest()->get();
         $projectcount = count($projects);
-        return $projectcount;
+        $projectnew = $projectcount + 1;
+        return $projectnew;
     }
 }

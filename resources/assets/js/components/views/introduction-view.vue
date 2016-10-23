@@ -9,7 +9,7 @@
             </div>
             <addclient v-if="showClient"></addclient>
          
-            <addproject v-if="showProject"></addproject>
+            <addproject v-if="showProject" :onboadring="true"></addproject>
    
             <addbrief v-if="showBrief"></addbrief>
         </div>
@@ -19,22 +19,31 @@
 import addclient from './../client/add-client.vue'
 import addbrief from './../brief/add-brief.vue'
 import addproject from './../project/add-project.vue'
+import { incrementCounter } from './../vuex/actions'
     export default{
+        name:'Getting-Started',
         data (){
             return {
-                formData:[],
-                clientList:[],
-                projectList:[],
-                briefList:[],
                 showClient:true,
                 showProject:false,
                 showBrief:false,
-                currentClient:{},
-                currentProject:{},
-                currentBrief:{},
-                userid:null,
                 username:'',
             }
+        },
+        events:{
+            'clientAdded': function () {
+                this.showClient = false;
+                this.showProject = true;
+            },
+            'projectAdded': function () {
+                this.showProject = false;
+                this.showBrief = true;
+
+            },
+            'briefAdded': function () {
+                this.showBrief = false;
+
+            },
         },
         components:{
             addclient:addclient,

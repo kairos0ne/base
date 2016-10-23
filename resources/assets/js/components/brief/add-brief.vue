@@ -27,28 +27,39 @@
     </div>
 </template>
 <script>
+import { setBriefInOnboarding } from "../vuex/actions"
+import { getProjectFromOnboarding } from "../vuex/getters"
     export default {
         data(){
             return {
                 submitted:false,
                 overviewsubmitted:false,
                 objectivesubmitted:false,
-                count:null,
                 newBriefData:{
+                    id:null,
                     overview:'',
                     objective:'',
                     project_id: null,
                     status:'New',
                     status_value:1,
                     ticket:1,
+                    jira_epic:1
                 }
+            }
+        },
+        vuex: {
+            getters: {
+             // note that you're passing the function itself, and not the value 'getCount()'
+            projectFromOnboarding: getProjectFromOnboarding
+            }, 
+            actions: {
+                setBriefInOnboarding,
             }
         },
         created(){
             // Get project id from parent component
-            this.getProjectId();
-            // Fire the count method on page load 
-            this.getBriefCount();
+                this.newBriefData.project_id = this.projectFromOnboarding.id;
+                this.getBriefCount();
             },
         methods: {
             setOverviewAdded: function () {
@@ -60,21 +71,22 @@
                 // update the brief count
                 this.getBriefCount();
                 // initialise a variable to assign the new data
+                var brief = this.newBriefData; 
+                this.setBriefInOnboarding(brief);
                 var request = this.newBriefData;
-                //Set the current brief on the parent vm
-                this.$parent.currentBrief.id = this.count + 1;
-                this.$parent.currentBrief.project_id = request.project_id;
-                this.$parent.currentBrief.overview = request.overview;
-                this.$parent.currentBrief.objective = request.objective;
                 // Change the showBrief value on the parent vm
-                this.$parent.showBrief = false;
+                this.$dispatch('briefAdded');
                 // show thanks message
                 this.submitted = true;
                 //reset inputs
                 this.newBriefData = {
+                    id:null,
+                    status:'',
+                    status_value:null,
                     overview:'',
                     objective:'',
-                    project_id:null
+                    project_id:null,
+                    ticket:null,
                 };
                 // send ajax request
                 this.$http.post('/api/post/briefs', request);
@@ -82,14 +94,10 @@
                 this.$router.go('/dashboard');
                 
             },
-            getProjectId:function () {
-                this.newBriefData.project_id = this.$parent.currentProject.id;  
-            },
             getBriefCount: function(){
-                this.$http.get('/api/get/briefcount').then(function (briefcount) {
+                this.$http.get('/api/get/briefcount').then(function (briefnew) {
                     //get the request data
-                    var count = briefcount.data;
-                    this.count = count;
+                    this.newBriefData.id = briefnew.data;
                 });
             }
         }

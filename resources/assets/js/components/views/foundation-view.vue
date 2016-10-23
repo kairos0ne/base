@@ -12,6 +12,7 @@
     import architecture from './../page_assets/architecture.vue'
     import research from './../page_assets/research.vue'
     export default{
+        name: 'information',
         data(){
             return{
                 msg:'hello vue'

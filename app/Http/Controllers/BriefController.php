@@ -126,6 +126,7 @@ class BriefController extends Controller
     {
         $briefs = Brief::latest()->get();
         $briefcount = count($briefs);
-        return $briefcount;
+        $briefnew = $briefcount + 1; 
+        return $briefnew;
     }
 }

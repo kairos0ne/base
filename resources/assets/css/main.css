@@ -32,6 +32,7 @@ li.client_panel {
 
 }
 
+
 p {
     line-height: 2em;
     font-weight: 300;
@@ -333,6 +334,14 @@ html,body {
 #content_pane_container {
     margin-left: 0px;
     padding-left: 0px;
+
+}
+@media screen and (max-width:991px) {
+    #content_pane_container{
+
+    padding-left:15px;
+    }
+
 
 }
 

@@ -87,6 +87,7 @@ class ClientController extends Controller
     {
         $clients = Client::latest()->get();
         $clientcount = count($clients);
-        return $clientcount;
+        $clientnew = $clientcount + 1; 
+        return $clientnew;
     }
 }

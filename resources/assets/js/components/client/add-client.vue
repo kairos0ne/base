@@ -28,29 +28,32 @@
     </div>
 </template>
 <script>
-
+import { setClientInOnboarding } from '../vuex/actions'
 export default {
     data(){
         return {
             submitted:false,
             showname:true,
             showarea:false,
-            clients:[],
-            count:null,
-            userid:null,
             newClientData: {
+                id:null,
                 name:'',
                 business_area:'',
-                user_id: this.userid,
+                user_id: null,
             }
         };
     },
-
+    vuex: {
+        actions: {
+          setClientInOnboarding,
+        }
+    },
     created(){
         // Get the client Count 
         this.getClientCount();
         // focus first input
         this.getUser();
+        
     },
     methods: {
         setNameAdded: function () {
@@ -62,45 +65,37 @@ export default {
             e.preventDefault();
             // Run the client function to ensure that the latest is current
             this.getClientCount();
-            // initialise a variable to assign the new data
+            // Store client in in onboarding vuex state 
+            var client = this.newClientData;
+            this.setClientInOnboarding(client);
+            this.$dispatch('clientAdded');  
             var request = this.newClientData;
-            // Add the id to current client.
-            this.$parent.currentClient.id = this.count + 1;
-            // add the client to client to a client object on the parent view model
-            this.$parent.currentClient.user_id = request.user_id;
-            this.$parent.currentClient.name = request.name;
-            this.$parent.currentClient.business_area = request.business_area;
-            // show thanks message
             this.submitted = true;
-            //set showarea to false
+            //set both to false 
             this.showarea = false;
-            // set hasClients to true
-            this.$parent.showClient = false;
-            // show the project component
-            this.$parent.showProject = true;
+            this.showname = true;
             //reset inputs
             this.newClientData = {
+                id:null,
                 name:'',
                 business_area:'',
                 user_id:null
             };
             // send ajax request
             this.$http.post('/api/post/clients', request);
-
         },
         getClientCount: function(){
-            this.$http.get('/api/get/clientcount').then(function (clientcount) {
-                //get the request
-                var count = clientcount.data;
-                this.count = count;
+            this.$http.get('/api/get/clientcount').then(function (clientnew) {
+                // Set the new client id with a count + 1
+                this.newClientData.id = clientnew.data;
+
             });
         },
         getUser: function () {
                 this.$http.get('/api/get/user').then(function (userdetails) {
-                this.userid = userdetails.data.id;
-                this.newClientData.user_id = this.userid;
+                    this.newClientData.user_id = userdetails.data.id;
                 });
-            },  
+        },  
     }
 }
 
