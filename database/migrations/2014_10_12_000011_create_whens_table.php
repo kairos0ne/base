@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContinuationGivenTable extends Migration
+class CreateWhensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,23 @@ class CreateContinuationGivenTable extends Migration
      */
     public function up()
     {
-        Schema::create('continuation_given', function (Blueprint $table) {
+        Schema::create('whens', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('text');
+            $table->integer('scenario_id')->unsigned()->index();
+            $table->foreign('scenario_id')->references('id')->on('scenarios')->onDelete('cascade');
+            $table->timestamps();
+        });
+        Schema::create('continuation_when', function (Blueprint $table) {
             $table->integer('continuation_id')->unsigned()->index();
             $table->foreign('continuation_id')
                 ->references('id')
                 ->on('continuations')
                 ->onDelete('cascade');
-            $table->integer('given_id')->unsigned()->index();
-            $table->foreign('given_id')
+            $table->integer('when_id')->unsigned()->index();
+            $table->foreign('when_id')
                 ->references('id')
-                ->on('givens')
+                ->on('whens')
                 ->onDelete('cascade');
             $table->timestamps();
         });
@@ -34,6 +41,7 @@ class CreateContinuationGivenTable extends Migration
      */
     public function down()
     {
-        Schema::drop('continuation_given');
+        Schema::drop('whens');
+        Schema::drop('continuation_when');
     }
 }

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContinuationThenTable extends Migration
+class CreateThensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,6 +12,16 @@ class CreateContinuationThenTable extends Migration
      */
     public function up()
     {
+        Schema::create('thens', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('text');
+            $table->integer('feature_id')->unsigned()->index();
+            $table->foreign('feature_id')
+                ->references('id')
+                ->on('features')
+                ->onDelete('cascade');
+            $table->timestamps();
+        });
         Schema::create('continuation_then', function (Blueprint $table) {
             $table->integer('continuation_id')->unsigned()->index();
             $table->foreign('continuation_id')
@@ -34,6 +44,7 @@ class CreateContinuationThenTable extends Migration
      */
     public function down()
     {
+        Schema::drop('thens');
         Schema::drop('continuation_then');
     }
 }

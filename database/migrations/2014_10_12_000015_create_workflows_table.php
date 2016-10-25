@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGivensTable extends Migration
+class CreateWorkflowsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,8 @@ class CreateGivensTable extends Migration
      */
     public function up()
     {
-        Schema::create('givens', function (Blueprint $table) {
+        Schema::create('workflows', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('text');
-            $table->integer('scenario_id')->unsigned()->index();
-            $table->foreign('scenario_id')
-                    ->references('id')
-                    ->on('scenarios')
-                    ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -31,6 +25,6 @@ class CreateGivensTable extends Migration
      */
     public function down()
     {
-        Schema::drop('givens');
+        Schema::drop('workflows');
     }
 }
