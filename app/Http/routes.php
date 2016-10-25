@@ -82,6 +82,14 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('api/get/projects/{id}', [
         'as' => 'client-projects', 'uses' => 'ProjectController@getProjectsForClient'
     ]);
+    // Get the projects type
+    Route::get('api/get/project/{id}/type', [
+        'as' => 'project-type', 'uses' => 'ProjectController@getProjectsType'
+    ]);
+    // Update the projects type 
+    Route::put('api/put/project/{id}/type',[
+        'as' => 'edit-project-type', 'uses' => 'ProjectController@editProjectType'
+    ]);
 
 /**  All Brief related api routes **/ 
     // Get all briefs for the signed in user 
@@ -146,6 +154,14 @@ Route::group(['middleware' => 'web'], function () {
         'as' => 'feature-scenario', 'uses' => 'ScenarioController@getScenariosForFeature'
     ]);
 
+/**  Test Workflow Change Table **/ 
+
+    Route::get('api/get/workflow/{id}', [
+        'as' => 'workflow', 'uses' => 'WorkflowController@show'
+    ]);
+    Route::post('api/post/workflow',[
+        'as' => 'create-workflow', 'uses' => 'WorkflowController@store'
+    ]);
 /*
 |--------------------------------------------------------------------------
 | API routes count items

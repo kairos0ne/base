@@ -31,7 +31,7 @@
         <div id="app">
             <div>
                 <nav class="navbar navbar-default">
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="navbar-header">
                             <!-- Collapsed Hamburger -->
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -55,6 +55,7 @@
                                 <li><a v-link="{ path: '/dashboard' }">Dashboard</a></li>
                                 @else
                                 <li><a v-link="{ path: '/introduction' }">Getting Started</a></li>
+                                <li><a v-link="{ path: '/workflow' }">Test Workflow</a></li>
                                 @endif
                                 <li><a v-link="{ path: '/documentation' }">Documentation</a></li>
                                 
