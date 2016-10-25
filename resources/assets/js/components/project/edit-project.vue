@@ -1,5 +1,5 @@
 <template>
-    <div id="content_pane_container" class="col-md-7 col-lg-7 col-sm-12">
+    <div id="content_pane_container">
         <form action="" method="POST" role="form">
                 <div class="form-group">
                     <ul class="list-group">
@@ -14,7 +14,16 @@
                             
                         </li>
                         <div id="page_content_brief_edit">
-                            <textarea class="form-control edit_input_style_body" name="description" id="decription" v-model="ProjectData.description" autocomplete="off"></textarea>
+                            <textarea id="resisable" class="form-control edit_input_style_body" name="description" id="decription" v-model="ProjectData.description" autocomplete="off">
+                            </textarea>
+
+                                <div class="select_container">
+                                    <p>Select your prefered project type and click enter.</p>
+                                    <select name="" id="input" class="form-control" required="required" v-model="type"  @click.prevent="setProjectType(type)">
+                                        <option v-for="type in types" value="" >{{type}}</option>
+                                    </select>
+                                </div>
+
                             <listbrief></listbrief> 
                         </div>
                     </ul> 
@@ -25,9 +34,9 @@
     </div>
 </template>
 <script>
-    import listbrief from '../brief/list-brief.vue'
-export default {
+import listbrief from '../brief/list-brief.vue'
 
+export default {
     data(){
         return {
             ProjectData: {
@@ -37,6 +46,14 @@ export default {
             clientID:null,
             briefList:[],
             status:null,
+            types:[
+                'Digital',
+                'Print',
+                'Packaging',
+                'Outdoor',
+                'Broadcast',
+            ],
+            type:null,
         };
     },
      components: {
@@ -68,6 +85,11 @@ export default {
             this.$dispatch('setEditProjectFalse');
             this.$dispatch('setShowProjectTrue');
         },
+        setProjectType:function (type){
+            this.$set(type)
+        }
     }
 }
+
+
 </script>

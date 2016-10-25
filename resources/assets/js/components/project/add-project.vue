@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- Start onboarding specific template - only shows if the prop 'onboarding' is true -->
         <div v-if="onboadring" class="container">
             <h2 class="survey col-lg-offset-2 col-lg-8 col-md-8 col-sm-12">Enter the project details.</h2>
             <div class="negative-space"></div>
@@ -32,7 +33,9 @@
                 </div>
             </form>
         </div>
-        <div v-else="! onboadring" id="content_pane_container" class="col-md-7 col-lg-7 col-sm-12">
+
+        <!-- Start add project generic temp for adding from edit dashboard -->
+        <div v-else="! onboadring" id="content_pane_container">
             <form action="" method="POST" role="form">
                     <div class="form-group">
                         <ul class="list-group">

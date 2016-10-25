@@ -15,6 +15,7 @@ import foundationView from './components/views/foundation-view.vue'
 import dashboardView from './components/app.vue'
 import introductionView from './components/views/introduction-view.vue'
 import welcomeView from './components/views/welcome-view.vue'
+import workflowView from './components/views/workflow-view.vue'
 // Import vuex store 
 import store from './components/vuex/store' // import the store we just created
 //set environment to debug
@@ -35,6 +36,9 @@ router.map({
     },
     '/introduction': {
         component: introductionView
+    },
+    '/workflow': {
+        component: workflowView
     },
 })
 

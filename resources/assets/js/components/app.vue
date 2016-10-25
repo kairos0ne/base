@@ -12,18 +12,23 @@
                 <!-- Main Content Bar Filter  -->
                 <projectpanels></projectpanels>
             </div>
-            <!-- Start Brief Rest Components -->
-            <showbrief v-show='showBrief'></showbrief>
-            <!-- Start Rest Project Components -->
-            <showproject v-show='showProject' ></showproject>
-            <!-- Start Client Rest Components -->
-            <showclient v-show='showClient' ></showclient>
-            <!-- Start edit project -->
-            <editproject v-show='editProject'></editproject>
-            <!-- Start edit Client --> 
-            <editclient v-show='editClient'></editclient>
-            <!-- Start edit Brief  -->
-            <editbrief v-show='editBrief'></editbrief>
+            <div id="content_section" class="col-md-7 col-lg-7 col-sm-12">
+                <!-- Main application space -->
+            
+                <!-- Start Brief Rest Components -->
+                <showbrief v-show='showBrief'></showbrief>
+                <!-- Start Rest Project Components -->
+                <showproject v-show='showProject' ></showproject>
+                <!-- Start Client Rest Components -->
+                <showclient v-show='showClient' ></showclient>
+                <!-- Start edit project -->
+                <editproject v-show='editProject'></editproject>
+                <!-- Start edit Client --> 
+                <editclient v-show='editClient'></editclient>
+                <!-- Start edit Brief  -->
+                <editbrief v-show='editBrief'></editbrief>
+                
+            </div>
         </colgroup>
     </div>
 </div>

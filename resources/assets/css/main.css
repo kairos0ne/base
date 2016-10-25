@@ -358,6 +358,11 @@ html,body {
     padding: 0px 0px 0px 0px;
     border-radius: 0px;
     height: 100%;
+
+}
+#content_section{
+    padding-left: 0px;
+    height: 100%;
 }
 /*Start navbar styling */
 .navbar{
@@ -615,5 +620,9 @@ li#project_list_bar.list-group-item:first-child{
     padding: 10px 15px;
     margin: 5px 0px 0px 0px;
     background-color: #fff;  
+}
+.select_container {
+    padding: 0px 15px 0px 15px;
+    width: 50%;
 }
 

@@ -1,5 +1,5 @@
 <template>
-    <div id="content_pane_container" class="col-md-7 col-lg-7 col-sm-12">
+    <div id="content_pane_container">
         <ul class="list-group">
             <li id="project_title" class="list-group-item h4 ">{{ currentClient.name }}
                 <a id="btn-edit" class="btn btn-default btn-xs pull-right" @click.prevent="editClient">

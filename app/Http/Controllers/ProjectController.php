@@ -76,7 +76,7 @@ class ProjectController extends Controller
      * Update the specified Project.
      *
      * @param  Request  $request
-     * @param  string  $id
+     * @param  int  $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -92,7 +92,7 @@ class ProjectController extends Controller
     }
     /**
      * Get the total number of clients to assign 
-     * @return int
+     * @return \Illuminate\Http\Response
      */
     public function countProjects()
     {
@@ -102,8 +102,8 @@ class ProjectController extends Controller
     }
     /**
      * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
+     * @param  $id clients id
+     * @return string $projects \Illuminate\Http\Response
      */
     public function getProjectsForClient($id)
     { 
@@ -111,6 +111,11 @@ class ProjectController extends Controller
         $projects = $client->projects;
         return $projects;
     }
+    
+    /**
+     * Get the project count and incriment for new projects
+     * @return int $projectnew \Illuminate\Http\Response
+     */
     public function projectcount ()
     {
         $projects = Project::latest()->get();
@@ -118,4 +123,17 @@ class ProjectController extends Controller
         $projectnew = $projectcount + 1;
         return $projectnew;
     }
+
+    /**
+     * [getProjectsType description]
+     * @param  int $id id of the project
+     * @return string $type \Illuminate\Http\Response
+     */
+    public function getProjectsType ($id)
+    {
+        $project = Project::findOrFail(1)->where('id', $id)->first();
+        $type = $project->type;
+        return $type;
+    }
+
 }

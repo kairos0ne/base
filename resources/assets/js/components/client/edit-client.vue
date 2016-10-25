@@ -1,5 +1,5 @@
 <template>
-    <div id="content_pane_container" class="col-md-7 col-lg-7 col-sm-12">
+    <div id="content_pane_container">
         <form action="" method="POST" role="form">
                 <div class="form-group">
                     <ul class="list-group">

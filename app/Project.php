@@ -43,5 +43,14 @@ class Project extends Model
     {
         return $this->hasMany('App\Brief');
     }
+    /**
+     * A project has one type
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function type()
+    {
+        return $this->hasOne('App\Type');
+    }
 
 }
