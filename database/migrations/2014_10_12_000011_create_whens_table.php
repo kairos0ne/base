@@ -41,7 +41,8 @@ class CreateWhensTable extends Migration
      */
     public function down()
     {
-        Schema::drop('whens');
         Schema::drop('continuation_when');
+        Schema::drop('whens');
+        
     }
 }

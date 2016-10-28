@@ -149,6 +149,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Aws\Laravel\AwsServiceProvider::class,
+        
 
         /*
          * Application Service Providers...

@@ -69,9 +69,10 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('files');
         Schema::drop('file_project');
         Schema::drop('brief_file');
         Schema::drop('client_file');
+        Schema::drop('files');
+        
     }
 }

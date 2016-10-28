@@ -55,7 +55,6 @@
                                 <li><a v-link="{ path: '/dashboard' }">Dashboard</a></li>
                                 @else
                                 <li><a v-link="{ path: '/introduction' }">Getting Started</a></li>
-                                <li><a v-link="{ path: '/workflow' }">Test Workflow</a></li>
                                 @endif
                                 <li><a v-link="{ path: '/documentation' }">Documentation</a></li>
                                 

@@ -44,7 +44,7 @@ class CreateThensTable extends Migration
      */
     public function down()
     {
-        Schema::drop('thens');
         Schema::drop('continuation_then');
+        Schema::drop('thens');    
     }
 }

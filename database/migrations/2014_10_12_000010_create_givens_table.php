@@ -44,7 +44,8 @@ class CreateGivensTable extends Migration
      */
     public function down()
     {
-        Schema::drop('givens');
         Schema::drop('continuation_given');
+        Schema::drop('givens');
+        
     }
 }
